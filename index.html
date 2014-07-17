@@ -32,12 +32,34 @@
     }
 
     #game{
-        margin: auto; width: 1000px;
+        margin: auto; width: 750px;
+    }
+
+    #title{
+        position: absolute;
+        top: 10px;
+        left: 10px;
+    }
+    #notice{
+        position: absolute;
+        bottom: 50px;
+        left: 20px;
+        width: 150px;
+    }
+    @media screen and (max-width: 975px){
+        /* Make the title and notice static here, so they don't overlap the game */
+        #title{
+            position: static;
+        }
+        #notice{
+            position: static;
+            width: inherit;
+        }
     }
     </style>
 </head>
 <body>
-<h1>Shutup</h1>
+<h1 id="title">Shutup</h1>
 <div id="game"></div>
 
 <div id="notice">Please note this is a development version of the game. <a href="https://github.com/CorinChappy/Shutup">GitHub</a></div>

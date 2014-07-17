@@ -98,7 +98,7 @@ function startGameloop(){
 
 var shutup = {
 
-	width : 1000, height : 500,
+	width : 750, height : 600,
 
 	assetDir : "assets/",
 

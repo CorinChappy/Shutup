@@ -35,13 +35,13 @@ shutup.Actor = function(def, initalPosition){
 		i : this.imgs.front
 	};
 };
-shutup.actor.prototype.update = function(dt){
+shutup.Actor.prototype.update = function(dt){
 	
 };
-shutup.actor.prototype.draw = function(){
+shutup.Actor.prototype.draw = function(){
 
 };
-shutup.actor.prototype.animate = function(dt){ // Animate the character
+shutup.Actor.prototype.animate = function(dt){ // Animate the character
 	if(this.entering){
 
 		return true;
@@ -57,7 +57,7 @@ shutup.actor.prototype.animate = function(dt){ // Animate the character
 
 	return false;
 };
-shutup.actor.prototype.updatePosition = function(position, x, y){
+shutup.Actor.prototype.updatePosition = function(position, x, y){
 
 };
 
