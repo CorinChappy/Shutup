@@ -68,15 +68,28 @@ shutup.Room.prototype.draw = function(){
 	}, this);
 
 };
-shutup.Room.prototype.findDrawPos = function(row, col){	// Finds the x/y coords to draw an actor, given it's position
+shutup.Room.prototype.findDrawPos = function(col, row){	// Finds the x/y coords to draw an actor, given it's position
 
+};
+shutup.Room.prototype.moveActor = function(actor, col, row){
+	var oldPos = actor.position;
+	if(oldPos.col !== -1 && oldPos.row !== -1 && this.actors[oldPos.col][oldPos.row] == actor){
+		this.actors[oldPos.col][oldPos.row] = false; // Remove actor from current position
+	}
+	if(row === -1 || col === -1){
+		actor.updatePosition(row, col); // Moving off screen, don't need the room to give locations
+		return actor;
+	}
+	var drawPos = this.findDrawPos(col, row);
+	this.actors[col][row] = actor;
+	actor.updatePosition(col, row, drawPos.x, drawPos.y);
 };
 
 
 // A person that is in the room
 shutup.Actor = function(def, initalPosition){
 
-	this.position = initalPosition || {x : 0, y : 0};
+	this.position = initalPosition || {col : -1, row : -1}; // Either of col or row -1 then the actor is not in the room
 	this.speed = 100;
 
 	this.noise = 0; // The amount of noise being made
@@ -106,7 +119,9 @@ shutup.Actor.prototype.update = function(dt){
 	
 };
 shutup.Actor.prototype.draw = function(){
-
+	//shutup.ctx.drawImage(this.g.i, this.g.x, this.g.y, this.g.w, this.g.h);
+	shutup.ctx.fillStyle = "purple";
+	shutup.ctx.fillRect(this.g.x, this.g.y, this.g.w, this.g.h);
 };
 shutup.Actor.prototype.animate = function(dt){ // Animate the character
 	if(this.entering){
@@ -124,8 +139,29 @@ shutup.Actor.prototype.animate = function(dt){ // Animate the character
 
 	return false;
 };
-shutup.Actor.prototype.updatePosition = function(positionX, positionY, drawX, drawY){
+shutup.Actor.prototype.updatePosition = function(col, row, drawX, drawY){
+	// Discover the action from the current and old positions
+	var oldOff = (this.position.col === -1 || this.position.row === -1),
+		newOff = (col === -1 || row === -1);
+	if(oldOff && newOff){
+		return false;
+	}
 
+	this.animating = false;
+	this.entering = false;
+	this.exiting = false;
+	this.moving = false;
+	if(newOff){
+		this.exiting = true;
+	}
+	if(oldOff){
+		this.entering = true;
+	}
+	this.position.col = col;
+	this.position.row = row;
+	this.g.target.x = drawX;
+	this.g.target.y = drawY;
+	return true;
 };
 
 
