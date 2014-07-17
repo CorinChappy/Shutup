@@ -91,10 +91,10 @@ shutup.Room.prototype.moveActor = function(actor, row, col){
 
 
 // A person that is in the room
-shutup.Actor = function(def, initalPosition){
+shutup.Actor = function(def){
 	if(!def){throw new Error("Actor not given a definition");}
 
-	this.position = initalPosition || {row : -1, col : -1}; // Either of col or row -1 then the actor is not in the room
+	this.position = {row : -1, col : -1}; // Either of col or row -1 then the actor is not in the room
 	this.speed = 100;
 
 	this.noise = 0; // The amount of noise being made
