@@ -6,7 +6,7 @@
 // The layout and composition of a room
 shutup.Room = function(rows, cols){
 
-	this.size = {rows : (rows || 6)}, cols : (cols || 6);
+	this.size = {rows : (rows || 6), cols : (cols || 6)};
 
 	// Create the 2D array of actor positions (accessed with this.actors[row][col];) Row starts from the top, col from the left
 	this.actors = (function(y, x){
@@ -69,7 +69,7 @@ shutup.Room.prototype.draw = function(){
 
 };
 shutup.Room.prototype.findDrawPos = function(row, col){	// Finds the x/y coords to draw an actor, given it's position
-
+	return {x : 10, y : 10};
 };
 shutup.Room.prototype.moveActor = function(actor, row, col){
 	var oldPos = actor.position;
@@ -106,14 +106,14 @@ shutup.Actor = function(def){
 
 	this.animationStep = 0; // How far through the animation the character is (out of 100)
 
-	this.imgs = def.imgs;
+	//this.imgs = def.imgs;
 
 	this.g = {
 		x: 0,
 		y: 0,
-		h : def.h,
-		w : def.w,
-		i : this.imgs.front
+		h : def.h || 50,
+		w : def.w || 50,
+	//	i : this.imgs.front
 	};
 	this.g.target = {
 		x : this.g.x,
