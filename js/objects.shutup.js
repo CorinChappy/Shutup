@@ -6,9 +6,9 @@
 // The layout and composition of a room
 shutup.Room = function(rows, cols){
 
-	this.size = {cols : (cols || 6), rows : (rows || 6)};
+	this.size = {rows : (rows || 6)}, cols : (cols || 6);
 
-	// Create the 2D array of actor positions (accessed with this.actors[col][row];) Col starts from the top, row from the left
+	// Create the 2D array of actor positions (accessed with this.actors[row][col];) Row starts from the top, col from the left
 	this.actors = (function(y, x){
 		var ar = [];
 		var genLine = function(){var a = []; while(a.length < x){a.push(false);} return a;};
@@ -16,7 +16,7 @@ shutup.Room = function(rows, cols){
 			ar.push(genLine());
 		}
 		return ar;
-	})(this.size.cols, this.size.rows);
+	})(this.size.rows, this.size.cols);
 
 	this.g = {
 		x : 0,
@@ -68,28 +68,33 @@ shutup.Room.prototype.draw = function(){
 	}, this);
 
 };
-shutup.Room.prototype.findDrawPos = function(col, row){	// Finds the x/y coords to draw an actor, given it's position
+shutup.Room.prototype.findDrawPos = function(row, col){	// Finds the x/y coords to draw an actor, given it's position
 
 };
-shutup.Room.prototype.moveActor = function(actor, col, row){
+shutup.Room.prototype.moveActor = function(actor, row, col){
 	var oldPos = actor.position;
-	if(oldPos.col !== -1 && oldPos.row !== -1 && this.actors[oldPos.col][oldPos.row] == actor){
-		this.actors[oldPos.col][oldPos.row] = false; // Remove actor from current position
+	if(oldPos.col !== -1 && oldPos.row !== -1 && this.actors[oldPos.row][oldPos.col] == actor){
+		this.actors[oldPos.row][oldPos.col] = false; // Remove actor from current position
 	}
+
+	var drawPos;
 	if(row === -1 || col === -1){
-		actor.updatePosition(row, col); // Moving off screen, don't need the room to give locations
-		return actor;
+		drawPos = this.findDrawPos(row); // Just passing in row will return the col as 0 and the correct row
+	}else{
+		drawPos = this.findDrawPos(row, col);
+		this.actors[row][col] = actor;
 	}
-	var drawPos = this.findDrawPos(col, row);
-	this.actors[col][row] = actor;
-	actor.updatePosition(col, row, drawPos.x, drawPos.y);
+
+	actor.updatePosition(row, col, drawPos.x, drawPos.y);
+	return actor;
 };
 
 
 // A person that is in the room
 shutup.Actor = function(def, initalPosition){
+	if(!def){throw new Error("Actor not given a definition");}
 
-	this.position = initalPosition || {col : -1, row : -1}; // Either of col or row -1 then the actor is not in the room
+	this.position = initalPosition || {row : -1, col : -1}; // Either of col or row -1 then the actor is not in the room
 	this.speed = 100;
 
 	this.noise = 0; // The amount of noise being made
@@ -139,26 +144,31 @@ shutup.Actor.prototype.animate = function(dt){ // Animate the character
 
 	return false;
 };
-shutup.Actor.prototype.updatePosition = function(col, row, drawX, drawY){
+shutup.Actor.prototype.updatePosition = function(row, col, drawX, drawY){
 	// Discover the action from the current and old positions
 	var oldOff = (this.position.col === -1 || this.position.row === -1),
 		newOff = (col === -1 || row === -1);
 	if(oldOff && newOff){
-		return false;
+		return false; // Offscreen to offscreen?
 	}
 
 	this.animating = false;
 	this.entering = false;
 	this.exiting = false;
 	this.moving = false;
+
 	if(newOff){
 		this.exiting = true;
+	}else{
+		if(oldOff){
+			this.entering = true;
+		}else{
+			this.moving = true;
+		}
 	}
-	if(oldOff){
-		this.entering = true;
-	}
-	this.position.col = col;
+
 	this.position.row = row;
+	this.position.col = col;
 	this.g.target.x = drawX;
 	this.g.target.y = drawY;
 	return true;
