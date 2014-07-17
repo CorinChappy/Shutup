@@ -130,7 +130,9 @@ var shutup = {
 
 		noiseThreshold : 100, // Level at which the game is lost
 
-		room : null // Object representing the current composition of the room
+		room : null, // Object representing the current composition of the room
+
+		onStage : null // A queue of actors currently on stage (not in play)
 	},
 
 	/* Global settings for the game */
@@ -143,7 +145,7 @@ var shutup = {
 	// Helper functions
 	h : {
 		timeConvert : function(t, p){ // Takes the time (ms) and converts it into a time of day (p represents need for second presistion)
-			var startTime = [18,0];
+			var startTime = [19,30];
 			// 1 sec = 1 min
 			var s = Math.floor(t/1000), // Secs
 				hours = Math.floor(s/60),
@@ -243,8 +245,6 @@ var shutup = {
 					shutup.ctx.textAlign = "right";
 					shutup.ctx.fillText(""+shutup.h.timeConvert(shutup.game.time), shutup.width - 10, 10);
 
-					shutup.game.player.draw();
-
 					switch(shutup.game.menu){
 						case 0 : { // No overlay
 						break; }
@@ -281,6 +281,7 @@ var shutup = {
 			shutup.ctx.fillRect(0, 0, shutup.width, shutup.height);
 			shutup.h.defaultCan(24);
 			shutup.ctx.fillText("The room", 30, 30);
+			shutup.game.room.draw();
 		},
 		o : { // Overlays/menus
 			inGame : function(){
