@@ -408,7 +408,7 @@ var shutup = {
 
 };
 
-/*(function(){
+(function(){
 	var tempVol = shutup.settings.volume;
 	shutup.pause = function(){
 		tempVol = shutup.settings.volume;
@@ -425,7 +425,7 @@ var shutup = {
 		shutup.locked = false;
 		shutup.emmitEvent("unpause");
 	};
-})();*/
+})();
 
 
 
@@ -486,15 +486,15 @@ shutup.init = function(div, assetDir){
 	if(evname){
 		document.addEventListener(evname,function(){
 			if(pageHidden()){
-				//pause
+				shutup.pause();
 			}else{
-				//unpause
+				shutup.unpause();
 			}
 		});
 	}else{
 		// Fallback with blur and focus
-		window.addEventListener("blur", function(){});
-		window.addEventListener("focus", function(){});
+		window.addEventListener("blur", function(){shutup.pause();});
+		window.addEventListener("focus", function(){setTimeout(shutup.unpause, 50);});
 	}
 };
 
