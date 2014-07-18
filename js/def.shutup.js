@@ -3,7 +3,14 @@
 "use strict"; // @start
 
 
-shutup.def = {};
+shutup.def = {
+	actors = [
+		{},
+		{}
+	];
+
+
+};
 
 
 })();

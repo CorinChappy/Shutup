@@ -1,26 +1,26 @@
 /*
-    Shutup is a game in a series of Stage Technician themed games (StageSoc Games), designed for use
+	Shutup is a game in a series of Stage Technician themed games (StageSoc Games), designed for use
 	on the University of Southampton Stage Technicians' Society's website (stagesoc.org.uk).
 
-    
-    Copyright (C) 2014  Corin Chaplin
-            All files contained herein have this notice unless otherwise stated
-            To view all collaborators on this project see the list
-            included in this program.
+	
+	Copyright (C) 2014  Corin Chaplin
+			All files contained herein have this notice unless otherwise stated
+			To view all collaborators on this project see the list
+			included in this program.
 
-    This program is free software; you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation; either version 2 of the License, or
-    (at your option) any later version.
+	This program is free software; you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation; either version 2 of the License, or
+	(at your option) any later version.
 
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+	This program is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
 
-    You should have received a copy of the GNU General Public License along
-    with this program; if not, write to the Free Software Foundation, Inc.,
-    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+	You should have received a copy of the GNU General Public License along
+	with this program; if not, write to the Free Software Foundation, Inc.,
+	51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
 
 (function(){
@@ -68,7 +68,17 @@ var pageHidden = (function(){
 })();
 
 
-
+/* Implimentation of the Fisher–Yates shuffle to randomise array order */
+function shuffle(array){
+	var m = array.length, t, i;
+	while(m){
+		i = Math.floor(Math.random() * m--);
+		t = array[m];
+		array[m] = array[i];
+		array[i] = t;
+	}
+	return array;
+}
 
 /* Game functions */
 function startGameloop(){
@@ -144,6 +154,36 @@ var shutup = {
 
 	// Helper functions
 	h : {
+		generateCast : function(num){ // Generates a number of cast memebers 
+			num = num || 10;
+			// Get array of the actor definitions
+			var actors = shuffle(def.actors.slice(0)),
+				doneActors = [],
+				offStage = 0.5, // Chance of an actor being in the game
+				roomSize = shutup.game.room.size;
+			while(num > 0){
+				if(actors.length === 0){ // If there are no more unused actors start from the top
+					var t = actors;
+					actors = shuffle(doneActors);
+					doneActors = t;
+				}
+
+				var def = actors.pop(),
+					act = new shutup.Actor(def);
+				if(Math.random() > offStage){
+					shutup.game.onStage.push(act);
+				}else{
+					// Attempt to push into the room until the game allows
+					var b = false;
+					while(!b){
+						b = shutup.game.room.moveActor(act, Math.floor(Math.random()*roomSize.rows), Math.floor(Math.random()*roomSize.cols));
+					}
+				}
+				doneActors.push(def);
+				num--;
+			}
+		},
+
 		timeConvert : function(t, p){ // Takes the time (ms) and converts it into a time of day (p represents need for second presistion)
 			var startTime = [19,30];
 			// 1 sec = 1 min

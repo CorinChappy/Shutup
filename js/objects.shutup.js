@@ -72,6 +72,10 @@ shutup.Room.prototype.findDrawPos = function(row, col){	// Finds the x/y coords 
 	return {x : 10, y : 10};
 };
 shutup.Room.prototype.moveActor = function(actor, row, col){
+	if(row !== -1 && col !== -1 && this.actors[row][col]){ // Check if there is already an actor in that position
+		return false;
+	}
+
 	var oldPos = actor.position;
 	if(oldPos.col !== -1 && oldPos.row !== -1 && this.actors[oldPos.row][oldPos.col] == actor){
 		this.actors[oldPos.row][oldPos.col] = false; // Remove actor from current position
