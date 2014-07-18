@@ -387,8 +387,22 @@ var shutup = {
 
 
 
-	newGame : function(player){
-		
+	newGame : function(rows, cols){
+		shutup.game.room = new shutup.Room(rows, cols); // Generate new playing room!
+
+		// Reset everything
+		shutup.game.time = 0;
+		shutup.game.menu = 0;
+		shutup.game.instructions = true;
+		shutup.game.noiseLevel = 0;
+		shutup.game.noiseThreshold = 100;
+		shutup.game.onStage = [];
+
+		shutup.h.generateCast(10); // Create a new cast
+
+		rigger.locked = false; // Unlock
+
+		rigger.state = 2; // Start the game!
 		shutup.emmitEvent("newgame");
 	}
 
