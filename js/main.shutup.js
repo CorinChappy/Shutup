@@ -185,7 +185,7 @@ var shutup = {
 		},
 
 		timeConvert : function(t, p){ // Takes the time (ms) and converts it into a time of day (p represents need for second presistion)
-			var startTime = [19,30];
+			var startTime = [19,0];
 			// 1 sec = 1 min
 			var s = Math.floor(t/1000), // Secs
 				hours = Math.floor(s/60),
@@ -241,7 +241,7 @@ var shutup = {
 						shutup.e.tick(dt); // Update the timer
 					}
 					// Check for winning conditions
-					if(shutup.game.time > 180000){ // 180000ms = 180s = 3 minutes = 3 hours in gametime (IE winning is at 10:30pm)
+					if(shutup.game.time > 180000){ // 210000ms = 210s = 3.5 minutes = 3.5 hours in gametime (IE winning is at 10:30pm)
 						shutup.state = 3;
 						shutup.emmitEvent("victory");
 					}
