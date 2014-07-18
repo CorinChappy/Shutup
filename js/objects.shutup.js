@@ -18,6 +18,9 @@ shutup.Room = function(rows, cols){
 		return ar;
 	})(this.size.rows, this.size.cols);
 
+	// 2D Array of actors moving on and off stage. First array represents the row they are on
+	this.moving = (function(b){var a = []; while(a.length < b){a.push([]);} return a;})(this.size.rows);
+
 	this.g = {
 		x : 0,
 		y : 0,
@@ -34,12 +37,22 @@ shutup.Room.prototype.update = function(dt){
 	// See if any of the actors need updating
 	this.actors.forEach(function(arr, row){
 		arr.forEach(function(act, col){
-			if(act){
-				if(act.animating || act.entering || act.exiting || act.moving || act.noise > 0){
-					act.update(dt);
-				}
+			if(act && (act.animating || act.moving || act.noise > 0)){
+				act.update(dt);
 			}
 		});
+	});
+	// Update the moving actors, move from the larray if they have finished moving etc.
+	this.moving.forEach(function(arr, row){
+		if(arr.length > 0){
+			arr.forEach(function(act){
+				if(act && (act.entering || act.exiting || act.moving)){
+					act.update(dt);
+				}else{
+					this.removeActor(act, row);
+				}
+			});
+		}
 	});
 };
 shutup.Room.prototype.draw = function(){
@@ -55,6 +68,14 @@ shutup.Room.prototype.draw = function(){
 				act.draw();
 			}
 		});
+		// Draw moving actors for this row
+		if(this.moving[row].length > 0){
+			this.moving[row].forEach(function(act){
+				if(act){
+					act.draw();
+				}
+			});
+		}
 		// Draw the bench for this row
 		var x = 0,
 			size = (this.g.h - this.g.top)/this.size.rows, // Size of each row (bench + space above)
@@ -94,6 +115,7 @@ shutup.Room.prototype.moveActor = function(actor, row, col){
 	var drawPos;
 	if(row === -1 || col === -1){
 		drawPos = this.findDrawPos(row); // Just passing in row will return the col as 0 and the correct row
+		this.moving[row].push(actor); // Push actor onto moving array so it is updated and drawn by the room
 	}else{
 		drawPos = this.findDrawPos(row, col);
 		this.actors[row][col] = actor;
@@ -102,7 +124,10 @@ shutup.Room.prototype.moveActor = function(actor, row, col){
 	actor.updatePosition(row, col, drawPos.x, drawPos.y);
 	return actor;
 };
-
+shutup.Room.prototype.removeActor = function(actor, row){ // Remove the actor from the moving array so it is no longer drawn or updated
+	var i = this.moving[row].indexOf(actor);
+	return (i > -1) && !!(this.moving[row].splice(i, 1));
+};
 
 // A person that is in the room
 shutup.Actor = function(def){
