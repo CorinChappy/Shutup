@@ -157,7 +157,7 @@ var shutup = {
 		generateCast : function(num){ // Generates a number of cast memebers 
 			num = num || 10;
 			// Get array of the actor definitions
-			var actors = shuffle(def.actors.slice(0)),
+			var actors = shuffle(shutup.def.actors.slice(0)),
 				doneActors = [],
 				offStage = 0.5, // Chance of an actor being in the game
 				roomSize = shutup.game.room.size;
@@ -400,9 +400,9 @@ var shutup = {
 
 		shutup.h.generateCast(10); // Create a new cast
 
-		rigger.locked = false; // Unlock
+		shutup.locked = false; // Unlock
 
-		rigger.state = 2; // Start the game!
+		shutup.state = 2; // Start the game!
 		shutup.emmitEvent("newgame");
 	}
 
