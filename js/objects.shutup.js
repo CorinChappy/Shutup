@@ -69,7 +69,17 @@ shutup.Room.prototype.draw = function(){
 
 };
 shutup.Room.prototype.findDrawPos = function(row, col){	// Finds the x/y coords to draw an actor, given it's position
-	return {x : 10, y : 10};
+	var sizeRow = (this.g.h - this.g.top)/this.size.rows, // Size of each row (bench + space above)
+		sizeCol = this.g.w/this.size.cols, // Size of each col
+
+		/* The centre points of the actors are returned */
+		coords = {
+			y : this.g.top + (sizeRow * row) + sizeRow/2,
+			x : (col)?(sizeCol/2) + sizeCol*col:0
+		};
+
+
+	return coords;
 };
 shutup.Room.prototype.moveActor = function(actor, row, col){
 	if(row !== -1 && col !== -1 && this.actors[row][col]){ // Check if there is already an actor in that position
@@ -173,8 +183,8 @@ shutup.Actor.prototype.updatePosition = function(row, col, drawX, drawY){
 
 	this.position.row = row;
 	this.position.col = col;
-	this.g.target.x = drawX;
-	this.g.target.y = drawY;
+	this.g./*target.*/x = drawX && drawX - (this.g.w/2);
+	this.g./*target.*/y = drawY && drawY - (this.g.h/2);
 	return true;
 };
 
