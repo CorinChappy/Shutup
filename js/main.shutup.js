@@ -239,18 +239,19 @@ var shutup = {
 
 					if(shutup.game.menu !== 2){ // Do not update on pause/game menu
 						shutup.e.tick(dt); // Update the timer
+					
+						// Check for winning conditions
+						if(shutup.game.time > 180000){ // 210000ms = 210s = 3.5 minutes = 3.5 hours in gametime (IE winning is at 10:30pm)
+							shutup.state = 3;
+							shutup.emmitEvent("victory");
+						}
+						// Check for failure condition
+						if(shutup.game.noiseLevel >= shutup.game.noiseThreshold){
+							shutup.state = 4;
+							shutup.emmitEvent("failure");
+						}
+						shutup.game.room.update(dt);
 					}
-					// Check for winning conditions
-					if(shutup.game.time > 180000){ // 210000ms = 210s = 3.5 minutes = 3.5 hours in gametime (IE winning is at 10:30pm)
-						shutup.state = 3;
-						shutup.emmitEvent("victory");
-					}
-					// Check for failure condition
-					if(shutup.game.noiseLevel >= shutup.game.noiseThreshold){
-						shutup.state = 4;
-						shutup.emmitEvent("failure");
-					}
-
 				break; }
 			}
 
@@ -317,10 +318,6 @@ var shutup = {
 	// Misc drawing functions
 	d : {
 		room : function(){
-			shutup.ctx.fillStyle = "green";
-			shutup.ctx.fillRect(0, 0, shutup.width, shutup.height);
-			shutup.h.defaultCan(24);
-			shutup.ctx.fillText("The room", 30, 30);
 			shutup.game.room.draw();
 		},
 		o : { // Overlays/menus
@@ -380,7 +377,7 @@ var shutup = {
 			shutup.ctx.fillStyle = "green";
 			shutup.ctx.fillRect(0, 0, shutup.width, shutup.height);
 			shutup.h.defaultCan(24);
-			shutup.ctx.fillText("Press space to win", 30, 30);
+			shutup.ctx.fillText("Press space to play", 30, 30);
 		}
 
 	},

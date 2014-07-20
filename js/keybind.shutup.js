@@ -73,6 +73,9 @@
 
 		32 : function(e){
 			// SPACE
+			if(shutup.state === 1){ // MAIN MENU
+				shutup.newGame();
+			}
 		},
 
 		68 : function(e){

@@ -37,7 +37,7 @@ shutup.Room.prototype.update = function(dt){
 	// See if any of the actors need updating
 	this.actors.forEach(function(arr, row){
 		arr.forEach(function(act, col){
-			if(act && (act.animating || act.moving || act.noise > 0)){
+			if(act && (act.animating || act.moving || act.entering || act.exiting || act.noise > 0)){
 				act.update(dt);
 			}
 		});
@@ -60,6 +60,8 @@ shutup.Room.prototype.draw = function(){
 	shutup.ctx.fillStyle = "green";
 	//shutup.ctx.drawImage(this.g.i.bg, this.g.x, this.g.y, this.g.w, this.g.h);
 	shutup.ctx.fillRect(this.g.x, this.g.y, this.g.w, this.g.h);
+	shutup.h.defaultCan(24);
+	shutup.ctx.fillText("The room", 30, 30);
 
 	// Draw each actor from top to bottom
 	this.actors.forEach(function(arr, row){
@@ -134,7 +136,7 @@ shutup.Actor = function(def){
 	if(!def){throw new Error("Actor not given a definition");}
 
 	this.position = {row : -1, col : -1}; // Either of col or row -1 then the actor is not in the room
-	this.speed = 100;
+	this.speed = 150;
 
 	this.noise = 0; // The amount of noise being made
 
@@ -142,6 +144,8 @@ shutup.Actor = function(def){
 	this.entering = false; // Whether the character is moving to their position
 	this.exiting = false; // Whether the character is moving away
 	this.moving = false; // Whether character is moving from one position to another
+
+	this.direction = 1; // Direction the player is moving (1 is left to right, -1 is right to left)
 
 	this.animationStep = 0; // How far through the animation the character is (out of 100)
 
@@ -160,7 +164,7 @@ shutup.Actor = function(def){
 	};
 };
 shutup.Actor.prototype.update = function(dt){
-	
+	this.animate(dt);
 };
 shutup.Actor.prototype.draw = function(){
 	//shutup.ctx.drawImage(this.g.i, this.g.x, this.g.y, this.g.w, this.g.h);
@@ -169,7 +173,12 @@ shutup.Actor.prototype.draw = function(){
 };
 shutup.Actor.prototype.animate = function(dt){ // Animate the character
 	if(this.entering){
-
+		var cond = (this.direction > 0)?(this.g.x < this.g.target.x):(this.g.x > this.g.target.x);
+		if(cond){
+			this.g.x += this.direction*dt*this.speed;
+		}else{
+			this.entering = false;
+		}
 		return true;
 	}
 	if(this.exiting){
@@ -198,9 +207,11 @@ shutup.Actor.prototype.updatePosition = function(row, col, drawX, drawY){
 
 	if(newOff){
 		this.exiting = true;
+		this.direction = 1; // Always enter and exit from the left
 	}else{
 		if(oldOff){
 			this.entering = true;
+			this.direction = 1;
 		}else{
 			this.moving = true;
 		}
@@ -208,8 +219,8 @@ shutup.Actor.prototype.updatePosition = function(row, col, drawX, drawY){
 
 	this.position.row = row;
 	this.position.col = col;
-	this.g./*target.*/x = drawX && drawX - (this.g.w/2);
-	this.g./*target.*/y = drawY && drawY - (this.g.h/2);
+	this.g.target.x = drawX && drawX - (this.g.w/2);
+	this.g.y = drawY && drawY - (this.g.h/2);
 	return true;
 };
 
