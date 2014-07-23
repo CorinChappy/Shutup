@@ -98,7 +98,7 @@ shutup.Room.prototype.findDrawPos = function(row, col){	// Finds the x/y coords 
 		/* The centre points of the actors are returned */
 		coords = {
 			y : this.g.top + (sizeRow * row) + sizeRow/2,
-			x : (col)?(sizeCol/2) + sizeCol*col:0
+			x : (col)?(sizeCol/2) + sizeCol*col:(Math.random() > 0.5)?0:shutup.width // if col doesn't exist then random which side to exit the actor
 		};
 
 
@@ -152,12 +152,12 @@ shutup.Actor = function(def){
 	//this.imgs = def.imgs;
 
 	this.g = {
-		x: 0,
-		y: 0,
+		y : 0,
 		h : def.h || 50,
 		w : def.w || 50,
 	//	i : this.imgs.front
 	};
+	this.g.x = 0 - this.g.w;
 	this.g.target = {
 		x : this.g.x,
 		y : this.g.y
@@ -172,21 +172,28 @@ shutup.Actor.prototype.draw = function(){
 	shutup.ctx.fillRect(this.g.x, this.g.y, this.g.w, this.g.h);
 };
 shutup.Actor.prototype.animate = function(dt){ // Animate the character
-	if(this.entering){
+	if(this.animating){
+
+		return true;
+	}
+	if(this.entering || this.exiting || this.moving){
 		var cond = (this.direction > 0)?(this.g.x < this.g.target.x):(this.g.x > this.g.target.x);
 		if(cond){
 			this.g.x += this.direction*dt*this.speed;
 		}else{
-			this.entering = false;
+			if(this.entering){
+				this.entering = false;
+			}
+			if(this.exiting){
+				this.exiting = false;
+				if(shutup.game.room.removeActor(this, this.position.row)){ // Remove actor from the screen
+					shutup.game.onStage.push(this); // Put actor onStage
+				}
+			}
+			if(this.moving){
+				this.moving = false;
+			}
 		}
-		return true;
-	}
-	if(this.exiting){
-
-		return true;
-	}
-	if(this.animating){
-
 		return true;
 	}
 
@@ -207,20 +214,29 @@ shutup.Actor.prototype.updatePosition = function(row, col, drawX, drawY){
 
 	if(newOff){
 		this.exiting = true;
-		this.direction = 1; // Always enter and exit from the left
+		this.direction = (drawX === 0)?-1:1;
 	}else{
 		if(oldOff){
 			this.entering = true;
-			this.direction = 1;
+			if(Math.random() > 0.5){
+				// Enter from the left
+				this.g.x = 0 - this.g.w;
+				this.direction = 1;
+			}else{
+				// Enter from the right
+				this.g.x = shutup.width + this.g.w;
+				this.direction = -1;
+			}
 		}else{
 			this.moving = true;
+			this.direction = (this.position.col > col)?-1:1;
 		}
 	}
 
 	this.position.row = row;
 	this.position.col = col;
-	this.g.target.x = drawX && drawX - (this.g.w/2);
-	this.g.y = drawY && drawY - (this.g.h/2);
+	this.g.target.x = drawX - (this.g.w/2);
+	this.g.y = drawY - (this.g.h/2);
 	return true;
 };
 
