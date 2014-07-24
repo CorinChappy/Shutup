@@ -51,9 +51,9 @@ shutup.Room.prototype.update = function(dt){
 				}else{
 					this.removeActor(act, row);
 				}
-			});
+			}, this);
 		}
-	});
+	}, this);
 };
 shutup.Room.prototype.draw = function(){
 	shutup.h.defaultCan();
@@ -126,9 +126,19 @@ shutup.Room.prototype.moveActor = function(actor, row, col){
 	actor.updatePosition(row, col, drawPos.x, drawPos.y);
 	return actor;
 };
-shutup.Room.prototype.removeActor = function(actor, row){ // Remove the actor from the moving array so it is no longer drawn or updated
-	var i = this.moving[row].indexOf(actor);
-	return (i > -1) && !!(this.moving[row].splice(i, 1));
+shutup.Room.prototype.removeActor = function(actor, row){ // Remove the actor from the moving array so it is no longer drawn or updated, providing row makes the search quicker
+	var i, a;
+	if(row){
+		a = this.moving[row];
+		i = a.indexOf(actor);
+	}else{
+		this.moving.some(function(arr){
+			i = arr.indexOf(actor);
+			a = arr;
+			return (i > -1);
+		});
+	}
+	return (i > -1) && !!(a.splice(i, 1));
 };
 
 // A person that is in the room
