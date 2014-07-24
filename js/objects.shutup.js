@@ -98,7 +98,7 @@ shutup.Room.prototype.findDrawPos = function(row, col){	// Finds the x/y coords 
 		/* The centre points of the actors are returned */
 		coords = {
 			y : this.g.top + (sizeRow * row) + sizeRow/2,
-			x : (col)?(sizeCol/2) + sizeCol*col:(Math.random() > 0.5)?0:shutup.width // if col doesn't exist then random which side to exit the actor
+			x : (col || col === 0)?(sizeCol/2) + sizeCol*col:(Math.random() > 0.5)?0:shutup.width // if col doesn't exist then random which side to exit the actor
 		};
 
 
