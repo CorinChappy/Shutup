@@ -440,6 +440,9 @@ shutup.init = function(div, assetDir){
 	shutup.canvas = canvas;
 	shutup.ctx = ctx;
 
+	// Create mouse bindings
+	shutup.mouse.init();
+
 	// Default fonts, etc for drawing
 	shutup.ctx.font = "12px 'Press Start 2P' Helvetica";
 	shutup.ctx.textBaseline = "top";

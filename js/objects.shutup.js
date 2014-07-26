@@ -174,7 +174,9 @@ shutup.Actor = function(def){
 	};
 };
 shutup.Actor.prototype.update = function(dt){
-	this.animate(dt);
+	if(this.animating || this.entering || this.exiting || this.moving){
+		this.animate(dt);
+	}
 };
 shutup.Actor.prototype.draw = function(){
 	//shutup.ctx.drawImage(this.g.i, this.g.x, this.g.y, this.g.w, this.g.h);
