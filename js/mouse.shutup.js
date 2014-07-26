@@ -23,7 +23,11 @@
 			},
 			// Left button
 			function(coords, e){
-
+				switch(shutup.state){
+					case 2 : { // IN GAME
+						
+					break; }
+				}
 			},
 			// Middle button
 			function(coords, e){

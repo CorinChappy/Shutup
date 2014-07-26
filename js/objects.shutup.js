@@ -93,16 +93,25 @@ shutup.Room.prototype.draw = function(){
 };
 shutup.Room.prototype.findDrawPos = function(row, col){	// Finds the x/y coords to draw an actor, given it's position
 	var sizeRow = (this.g.h - this.g.top)/this.size.rows, // Size of each row (bench + space above)
-		sizeCol = this.g.w/this.size.cols, // Size of each col
+		sizeCol = this.g.w/this.size.cols; // Size of each col
 
 		/* The centre points of the actors are returned */
-		coords = {
+		return {
 			y : this.g.top + (sizeRow * row) + sizeRow/2,
 			x : (col || col === 0)?(sizeCol/2) + sizeCol*col:(Math.random() > 0.5)?0:shutup.width // if col doesn't exist then random which side to exit the actor
 		};
 
+};
+shutup.Room.prototype.findPosFromDraw = function(x, y){ // Finds the position from given x,y coords
+		var sizeRow = (this.g.h - this.g.top)/this.size.rows, // Size of each row (bench + space above)
+		sizeCol = this.g.w/this.size.cols; // Size of each col
 
-	return coords;
+		if(y < this.g.top){ // Quick return if out of range of the rows
+			return false;
+		}
+
+
+		// TODO: Complete this function
 };
 shutup.Room.prototype.moveActor = function(actor, row, col){
 	if(row !== -1 && col !== -1 && this.actors[row][col]){ // Check if there is already an actor in that position
