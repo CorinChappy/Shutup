@@ -103,15 +103,15 @@ shutup.Room.prototype.findDrawPos = function(row, col){	// Finds the x/y coords 
 
 };
 shutup.Room.prototype.findPosFromDraw = function(x, y){ // Finds the position from given x,y coords
-		var sizeRow = (this.g.h - this.g.top)/this.size.rows, // Size of each row (bench + space above)
-		sizeCol = this.g.w/this.size.cols; // Size of each col
-
 		if(y < this.g.top){ // Quick return if out of range of the rows
 			return false;
 		}
 
+		var sizeCol = this.g.w/this.size.cols, // Size of each col
+			sizeRow = (this.g.h - this.g.top)/this.size.rows; // Size of each row (bench + space above)
 
-		// TODO: Complete this function
+		return { col : Math.floor(x/sizeCol),
+				row : Math.floor((y - this.g.top)/sizeRow)};
 };
 shutup.Room.prototype.moveActor = function(actor, row, col){
 	if(row !== -1 && col !== -1 && this.actors[row][col]){ // Check if there is already an actor in that position
