@@ -25,7 +25,11 @@
 			function(coords, e){
 				switch(shutup.state){
 					case 2 : { // IN GAME
-						
+						var pos = shutup.game.room.findPosFromDraw(coords);
+						var a = shutup.game.room.getActor(pos);
+						if(a){
+							a.onClick(e.which);
+						}
 					break; }
 				}
 			},

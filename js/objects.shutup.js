@@ -91,6 +91,9 @@ shutup.Room.prototype.draw = function(){
 	}, this);
 
 };
+shutup.Room.prototype.getActor = function(position){
+	return position.row && position.col && this.actors[position.row][position.col];
+};
 shutup.Room.prototype.findDrawPos = function(row, col){	// Finds the x/y coords to draw an actor, given it's position
 	var sizeRow = (this.g.h - this.g.top)/this.size.rows, // Size of each row (bench + space above)
 		sizeCol = this.g.w/this.size.cols; // Size of each col
@@ -103,6 +106,9 @@ shutup.Room.prototype.findDrawPos = function(row, col){	// Finds the x/y coords 
 
 };
 shutup.Room.prototype.findPosFromDraw = function(x, y){ // Finds the position from given x,y coords
+		if(!y && y !== 0){ // Check if x is an object
+			y = x.y; x = x.x; // Extract out the objects
+		}
 		if(y < this.g.top){ // Quick return if out of range of the rows
 			return false;
 		}
@@ -149,6 +155,8 @@ shutup.Room.prototype.removeActor = function(actor, row){ // Remove the actor fr
 	}
 	return (i > -1) && !!(a.splice(i, 1));
 };
+
+
 
 // A person that is in the room
 shutup.Actor = function(def){
@@ -259,6 +267,9 @@ shutup.Actor.prototype.updatePosition = function(row, col, drawX, drawY){
 	this.g.target.x = drawX - (this.g.w/2);
 	this.g.y = drawY - (this.g.h/2);
 	return true;
+};
+shutup.Actor.prototype.onClick = function(which){
+	console.log(JSON.stringify(this));
 };
 
 
