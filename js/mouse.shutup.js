@@ -24,6 +24,11 @@
 			// Left button
 			function(coords, e){
 				switch(shutup.state){
+					case 1 : { // Main Menu
+						if(coords.x >= 325 && coords.x <= 425 && coords.y >= 90 && coords.y <= 130){
+							shutup.newGame();
+						}
+					break; }
 					case 2 : { // IN GAME
 						var pos = shutup.game.room.findPosFromDraw(coords);
 						var a = shutup.game.room.getActor(pos);

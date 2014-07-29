@@ -377,7 +377,9 @@ var shutup = {
 			shutup.ctx.fillStyle = "green";
 			shutup.ctx.fillRect(0, 0, shutup.width, shutup.height);
 			shutup.h.defaultCan(24);
-			shutup.ctx.fillText("Press space to play", 30, 30);
+			shutup.ctx.fillText("Welcome to Shutup!", 30, 30);
+			shutup.ctx.textAlign = "center";
+			shutup.ctx.fillText("Play", shutup.width/2, 100);
 		}
 
 	},
