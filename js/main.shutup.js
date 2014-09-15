@@ -27,11 +27,17 @@
 "use strict";
 
 /* Import fonts from Google fonts */
-window["WebFontConfig"] = {};
-window["WebFontConfig"]["google"] = {};
-window["WebFontConfig"]["google"]["families"] = [
-	'Press+Start+2P::latin' // By: CodeMan38,  http://www.google.com/fonts/#QuickUsePlace:quickUse/Family:Press+Start+2P
-];
+window["WebFontConfig"] = window["WebFontConfig"] || {};
+window["WebFontConfig"]["google"] = window["WebFontConfig"]["google"] || {};
+if(window["WebFontConfig"]["google"]["families"] && Array.isArray(window["WebFontConfig"]["google"]["families"])){
+    window["WebFontConfig"]["google"]["families"].push(
+        'Press+Start+2P::latin' // By: CodeMan38,  http://www.google.com/fonts/#QuickUsePlace:quickUse/Family:Press+Start+2P
+    );
+}else{
+    window["WebFontConfig"]["google"]["families"] = [
+        'Press+Start+2P::latin' // By: CodeMan38,  http://www.google.com/fonts/#QuickUsePlace:quickUse/Family:Press+Start+2P
+    ];
+}
 (function() {
 	var wf = document.createElement('script');
 	wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
