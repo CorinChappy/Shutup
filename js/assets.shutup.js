@@ -7,16 +7,16 @@
 		sprites : {
 			actors : {
 				robin : [
-					"actors/robin/1.png",
-					"actors/robin/2.png",
-					"actors/robin/3.png",
-					"actors/robin/4.png",
-					"actors/robin/5.png",
-					"actors/robin/6.png",
-					"actors/robin/7.png",
-					"actors/robin/8.png",
-					"actors/robin/9.png",
-					"actors/robin/10.png"
+					"sprites/actors/robin/1.png",
+					"sprites/actors/robin/2.png",
+					"sprites/actors/robin/3.png",
+					"sprites/actors/robin/4.png",
+					"sprites/actors/robin/5.png",
+					"sprites/actors/robin/6.png",
+					"sprites/actors/robin/7.png",
+					"sprites/actors/robin/8.png",
+					"sprites/actors/robin/9.png",
+					"sprites/actors/robin/10.png"
 				]
 			}
 		},
