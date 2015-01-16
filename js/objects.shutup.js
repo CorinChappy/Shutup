@@ -92,7 +92,7 @@ shutup.Room.prototype.draw = function(){
 
 };
 shutup.Room.prototype.getActor = function(position){
-	return position.row && position.col && this.actors[position.row][position.col];
+	return position.row >= 0 && position.col >= 0 && this.actors[position.row][position.col];
 };
 shutup.Room.prototype.findDrawPos = function(row, col){	// Finds the x/y coords to draw an actor, given it's position
 	var sizeRow = (this.g.h - this.g.top)/this.size.rows, // Size of each row (bench + space above)
@@ -117,7 +117,7 @@ shutup.Room.prototype.findPosFromDraw = function(x, y){ // Finds the position fr
 			sizeRow = (this.g.h - this.g.top)/this.size.rows; // Size of each row (bench + space above)
 
 		return { col : Math.floor(x/sizeCol),
-				row : Math.floor((y - this.g.top)/sizeRow)};
+				row : Math.floor(((y - this.g.top + 50)/sizeRow))};
 };
 shutup.Room.prototype.moveActor = function(actor, row, col){
 	if(row !== -1 && col !== -1 && this.actors[row][col]){ // Check if there is already an actor in that position
