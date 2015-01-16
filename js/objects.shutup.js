@@ -26,10 +26,10 @@ shutup.Room = function(rows, cols){
 		y : 0,
 		h : shutup.height,
 		w : shutup.width,
-		top : 50, // pxs from the top of the room that don't have rows on them
+		top : 290, // pxs from the top of the room that don't have rows on them
 		i : {
-				//bg : shutup.def.assets.bg.green,
-				//bench : shutup.def.assets.bg.bench
+				bg : shutup.assets.sprites.bg.green,
+				bench : shutup.assets.sprites.bg.bench
 			}
 	}
 };
@@ -58,10 +58,10 @@ shutup.Room.prototype.update = function(dt){
 shutup.Room.prototype.draw = function(){
 	shutup.h.defaultCan();
 	shutup.ctx.fillStyle = "green";
-	//shutup.ctx.drawImage(this.g.i.bg, this.g.x, this.g.y, this.g.w, this.g.h);
-	shutup.ctx.fillRect(this.g.x, this.g.y, this.g.w, this.g.h);
+	shutup.ctx.drawImage(this.g.i.bg, this.g.x, this.g.y, this.g.w, this.g.h);
+	//shutup.ctx.fillRect(this.g.x, this.g.y, this.g.w, this.g.h);
 	shutup.h.defaultCan(24);
-	shutup.ctx.fillText("The room", 30, 30);
+	shutup.ctx.fillText("Green room", 30, 30);
 
 	// Draw each actor from top to bottom
 	this.actors.forEach(function(arr, row){
@@ -82,12 +82,12 @@ shutup.Room.prototype.draw = function(){
 		var x = 0,
 			size = (this.g.h - this.g.top)/this.size.rows, // Size of each row (bench + space above)
 			//  top padding   top of row     row padding
-			y = this.g.top + (size * row) + (size/2),
+			y = this.g.top + (size * row),// + (size/2),
 			w = this.g.w,
-			h = size/2;
-			//shutup.ctx.drawImage(this.g.i.desk, x, y, w, h);
+			h = size;//2;
+			shutup.ctx.drawImage(this.g.i.bench, x, y, w, h);
 			shutup.ctx.fillStyle = "blue";
-			shutup.ctx.fillRect(x, y, w, h);
+			//shutup.ctx.fillRect(x, y, w, h);
 	}, this);
 
 };
@@ -272,7 +272,7 @@ shutup.Actor.prototype.updatePosition = function(row, col, drawX, drawY){
 	this.position.row = row;
 	this.position.col = col;
 	this.g.target.x = drawX - (this.g.w/2);
-	this.g.y = drawY - (this.g.h*2/3);
+	this.g.y = drawY - (this.g.h*9/10);
 	return true;
 };
 shutup.Actor.prototype.onClick = function(which){

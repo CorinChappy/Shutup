@@ -5,6 +5,10 @@
 (function(obj){
 	obj.assets = {
 		sprites : {
+			bg : {
+				green : "sprites/bg/green.png",
+				bench : "sprites/bg/bench.png"
+			},
 			actors : {
 				robin : [
 					"sprites/actors/robin/1.png",
