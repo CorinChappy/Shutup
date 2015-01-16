@@ -184,6 +184,10 @@ shutup.Actor = function(def){
 		w : def.w || 50,
 	//	i : this.imgs.front
 	};
+	if(def.imgs){
+		this.g.i = def.imgs;
+	}
+
 	this.g.x = 0 - this.g.w;
 	this.g.target = {
 		x : this.g.x,
@@ -196,9 +200,12 @@ shutup.Actor.prototype.update = function(dt){
 	}
 };
 shutup.Actor.prototype.draw = function(){
-	//shutup.ctx.drawImage(this.g.i, this.g.x, this.g.y, this.g.w, this.g.h);
-	shutup.ctx.fillStyle = "purple";
-	shutup.ctx.fillRect(this.g.x, this.g.y, this.g.w, this.g.h);
+	if(this.g.i){
+		shutup.ctx.drawImage(this.g.i, this.g.x, this.g.y, this.g.w, this.g.h);
+	}else{
+		shutup.ctx.fillStyle = "purple";
+		shutup.ctx.fillRect(this.g.x, this.g.y, this.g.w, this.g.h);
+	}
 };
 shutup.Actor.prototype.animate = function(dt){ // Animate the character
 	if(this.animating){
@@ -265,11 +272,11 @@ shutup.Actor.prototype.updatePosition = function(row, col, drawX, drawY){
 	this.position.row = row;
 	this.position.col = col;
 	this.g.target.x = drawX - (this.g.w/2);
-	this.g.y = drawY - (this.g.h/2);
+	this.g.y = drawY - (this.g.h*2/3);
 	return true;
 };
 shutup.Actor.prototype.onClick = function(which){
-	console.log(JSON.stringify(this));
+	console.log(this);
 };
 
 

@@ -4,7 +4,22 @@
 
 (function(obj){
 	obj.assets = {
-		sprites : {},
+		sprites : {
+			actors : {
+				robin : [
+					"actors/robin/1.png",
+					"actors/robin/2.png",
+					"actors/robin/3.png",
+					"actors/robin/4.png",
+					"actors/robin/5.png",
+					"actors/robin/6.png",
+					"actors/robin/7.png",
+					"actors/robin/8.png",
+					"actors/robin/9.png",
+					"actors/robin/10.png"
+				]
+			}
+		},
 
 		// Audio stored in an array, index: 0 = ogg; 1 = mp3
 		/* Audio keys need to be strings so the closure compiler will not rename them */
