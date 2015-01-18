@@ -148,15 +148,12 @@ shutup.Room.prototype.findPosFromDraw = function(x, y){ // Finds the position fr
 		if(!y && y !== 0){ // Check if x is an object
 			y = x.y; x = x.x; // Extract out the objects
 		}
-		if(y < this.g.top){ // Quick return if out of range of the rows
-			return false;
-		}
 
 		var sizeCol = this.g.w/this.size.cols, // Size of each col
 			sizeRow = (this.g.h - this.g.top)/this.size.rows; // Size of each row (bench + space above)
 
 		return { col : Math.floor(x/sizeCol),
-				row : Math.floor(((y - this.g.top + 50)/sizeRow))};
+				row : Math.floor(((y - this.g.top)/sizeRow)) + 1};
 };
 shutup.Room.prototype.moveActor = function(actor, row, col){
 	if(row !== -1 && col !== -1 && this.actors[row][col]){ // Check if there is already an actor in that position
