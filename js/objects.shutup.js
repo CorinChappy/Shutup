@@ -236,7 +236,7 @@ shutup.Actor.prototype.draw = function(){
 			var size = this.noise*3;
 
 
-			var ratio = 57/47; // Taken from note image dimensions (w/h)
+			var ratio = 279/229; // Taken from note image dimensions (w/h)
 			shutup.ctx.drawImage(shutup.assets.sprites.misc.note, this.g.x, this.g.y-size, size*ratio, size);
 		}
 	}else{
