@@ -331,7 +331,7 @@ var shutup = {
 			shutup.ctx.lineWidth = 3;
 			shutup.ctx.fillStyle = "white";
 			shutup.ctx.fillRect(30, 30, 300, 30);
-			var nl = shutup.game.room.noiseLevel;
+			var nl = Math.clamp(shutup.game.room.noiseLevel, 0, 100);
 			if(nl < 25){
 				shutup.ctx.fillStyle = "green";
 			}else{
