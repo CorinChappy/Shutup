@@ -36,6 +36,13 @@
 							a.onClick(e.which);
 						}
 					break; }
+
+					case 3 :   // Success
+					case 4 : { // Failure
+						if(coords.x >= 250 && coords.x <= 500 && coords.y >= 500 && coords.y <= 540){
+							shutup.state = 1;
+						}
+					break; }
 				}
 			},
 			// Middle button

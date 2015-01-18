@@ -248,14 +248,14 @@ shutup.Actor.prototype.update = function(dt){
 	}else{
 		// Randomly see if I should increase noise
 		if(Math.random()*5000 < this.volatility){
-			var x = shutup.h.randomInt(0, 40), inc = 10;
+			var x = shutup.h.randomInt(0, 35), inc = 10;
 			if(x <= 10){
 				inc = x+5;
 			}else{
 				if(x <= 30){
 					inc = 15;
 				}else{
-					if(x <= 40){
+					if(x <= 35){
 						inc = (1.5*x)-30;
 					}
 				}
@@ -265,10 +265,6 @@ shutup.Actor.prototype.update = function(dt){
 		}else{
 			this.volatility += dt;
 		}
-	}
-
-	if(this.noise > 0){
-		// Something here needed? No?
 	}
 
 

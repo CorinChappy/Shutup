@@ -386,6 +386,8 @@ var shutup = {
 
 				shutup.h.defaultCan(20);
 				shutup.ctx.fillText("- Jamie Hemingway", shutup.width/2, shutup.height/2 + 60);
+
+				shutup.ctx.fillText("Play again?", shutup.width/2 - 125, 500);
 			},
 			failure : function(){
 				if(shutup.game.room){
@@ -410,6 +412,8 @@ var shutup = {
 
 				shutup.h.defaultCan(20);
 				shutup.ctx.fillText("- Caitlin Hobbs", shutup.width/2, shutup.height/2 + 60);
+
+				shutup.ctx.fillText("Play again?", shutup.width/2 - 125, 500);
 			}
 		},
 		error : function(){
