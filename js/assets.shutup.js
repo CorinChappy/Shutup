@@ -10,7 +10,9 @@
 				bench : "sprites/bg/bench.png"
 			},
 			misc : {
-				note : "sprites/misc/note.png"
+				note : "sprites/misc/note.png",
+				stars1 : "sprites/misc/stars1.png",
+				stars5 : "sprites/misc/stars5.png"
 			},
 			actors : {
 				robin : [

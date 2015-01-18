@@ -289,26 +289,7 @@ var shutup = {
 				case 2 : { // IN GAME
 					shutup.d.room();
 
-					// Display the time
-					shutup.h.defaultCan(20);
-					shutup.ctx.textAlign = "right";
-					shutup.ctx.fillText(""+shutup.h.timeConvert(shutup.game.time), shutup.width - 30, 10);
-
-					shutup.ctx.lineWidth = 3;
-					shutup.ctx.fillStyle = "white";
-					shutup.ctx.fillRect(30, 30, 300, 30);
-					var nl = shutup.game.room.noiseLevel;
-					if(nl < 25){
-						shutup.ctx.fillStyle = "green";
-					}else{
-						if(nl < 75){
-							shutup.ctx.fillStyle = "orange";
-						}else{
-							shutup.ctx.fillStyle = "red";
-						}
-					}
-					shutup.ctx.fillRect(30, 30, shutup.game.room.noiseLevel*3, 30);
-					shutup.ctx.strokeRect(30, 30, 300, 30);
+					shutup.d.hud();
 
 					switch(shutup.game.menu){
 						case 0 : { // No overlay
@@ -341,6 +322,28 @@ var shutup = {
 
 	// Misc drawing functions
 	d : {
+		hud : function(){
+			// Display the time
+			shutup.h.defaultCan(20);
+			shutup.ctx.textAlign = "right";
+			shutup.ctx.fillText(""+shutup.h.timeConvert(shutup.game.time), shutup.width - 30, 10);
+
+			shutup.ctx.lineWidth = 3;
+			shutup.ctx.fillStyle = "white";
+			shutup.ctx.fillRect(30, 30, 300, 30);
+			var nl = shutup.game.room.noiseLevel;
+			if(nl < 25){
+				shutup.ctx.fillStyle = "green";
+			}else{
+				if(nl < 75){
+					shutup.ctx.fillStyle = "orange";
+				}else{
+					shutup.ctx.fillStyle = "red";
+				}
+			}
+			shutup.ctx.fillRect(30, 30, shutup.game.room.noiseLevel*3, 30);
+			shutup.ctx.strokeRect(30, 30, 300, 30);
+		},
 		room : function(){
 			shutup.game.room.draw();
 		},
@@ -358,17 +361,52 @@ var shutup = {
 				shutup.ctx.fillText("Game Paused...", shutup.width/2, shutup.height/5);
 			},
 			victory : function(){
-				shutup.ctx.fillStyle = "green";
-				shutup.ctx.fillRect(0, 0, shutup.width, shutup.height);
-				shutup.h.defaultCan(24);
-				shutup.ctx.fillText("You win", 30, 30);
+				if(shutup.game.room){
+					shutup.game.room.draw();
+					shutup.d.hud();
 
+					shutup.ctx.globalAlpha = 0.7;
+					shutup.ctx.fillStyle = "white";
+					shutup.ctx.fillRect(0, 0, shutup.width, shutup.height);
+				}else{
+					shutup.ctx.fillStyle = "green";
+					shutup.ctx.fillRect(0, 0, shutup.width, shutup.height);
+				}
+
+				shutup.h.defaultCan(24);
+				shutup.ctx.fillText("You kept them all quiet", 30, 130);
+				shutup.ctx.fillText("and he show was a success!", 30, 180);
+
+				shutup.ctx.fillStyle = "white";
+				shutup.ctx.fillRect(shutup.width/2 - 150, shutup.height/2 - 29, 300, 57);
+				shutup.ctx.drawImage(shutup.assets.sprites.misc.stars5, shutup.width/2 - 150, shutup.height/2 - 29, 300, 57);
+
+				shutup.h.defaultCan(20);
+				shutup.ctx.fillText("- Jamie Hemingway", shutup.width/2, shutup.height/2 + 60);
 			},
 			failure : function(){
-				shutup.ctx.fillStyle = "green";
-				shutup.ctx.fillRect(0, 0, shutup.width, shutup.height);
+				if(shutup.game.room){
+					shutup.game.room.draw();
+					shutup.d.hud();
+
+					shutup.ctx.globalAlpha = 0.7;
+					shutup.ctx.fillStyle = "white";
+					shutup.ctx.fillRect(0, 0, shutup.width, shutup.height);
+				}else{
+					shutup.ctx.fillStyle = "green";
+					shutup.ctx.fillRect(0, 0, shutup.width, shutup.height);
+				}
+
 				shutup.h.defaultCan(24);
-				shutup.ctx.fillText("You do not win", 30, 30);
+				shutup.ctx.fillText("The cast were too loud", 30, 130);
+				shutup.ctx.fillText("The show is ruined!", 30, 180);
+
+				shutup.ctx.fillStyle = "white";
+				shutup.ctx.fillRect(shutup.width/2 - 150, shutup.height/2 - 29, 300, 57);
+				shutup.ctx.drawImage(shutup.assets.sprites.misc.stars1, shutup.width/2 - 150, shutup.height/2 - 29, 300, 57);
+
+				shutup.h.defaultCan(20);
+				shutup.ctx.fillText("- Caitlin Hobbs", shutup.width/2, shutup.height/2 + 60);
 			}
 		},
 		error : function(){
