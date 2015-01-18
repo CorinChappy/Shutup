@@ -40,9 +40,8 @@ shutup.Room.prototype.update = function(dt){
 
 	// See if any of the actors need updating
 	this.forEachActor(function(act, row, col){
-		if(act.animating || act.moving || act.entering || act.exiting || act.noise > 0){
-			act.update(dt);
-		}
+		act.update(dt);
+
 		// Update the noise values regardless
 		this.noiseLevel += act.noise;
 	});
@@ -91,7 +90,11 @@ shutup.Room.prototype.draw = function(){
 
 };
 shutup.Room.prototype.getActor = function(position){
-	return position.row >= 0 && position.col >= 0 && this.actors[position.row][position.col];
+	try{
+		return position.row >= 0 && position.col >= 0 && this.actors[position.row][position.col];
+	}catch(e){
+		return false;
+	}
 };
 shutup.Room.prototype.findDrawPos = function(row, col){	// Finds the x/y coords to draw an actor, given it's position
 	var sizeRow = (this.g.h - this.g.top)/this.size.rows, // Size of each row (bench + space above)
@@ -176,6 +179,7 @@ shutup.Actor = function(def){
 	this.speed = 150;
 
 	this.noise = 0; // The amount of noise being made
+	this.volatility = 0; // How likely they are to make noise
 
 	this.animating = false; // Whether the character is animating
 	this.entering = false; // Whether the character is moving to their position
@@ -207,11 +211,34 @@ shutup.Actor = function(def){
 shutup.Actor.prototype.update = function(dt){
 	if(this.animating || this.entering || this.exiting || this.moving){
 		this.animate(dt);
+	}else{
+		// Randomly see if I should increase noise
+		if(Math.random()*5000 < this.volatility){
+			this.noise += 10;
+			this.volatility = 0;
+		}else{
+			this.volatility += dt;
+		}
 	}
+
+	if(this.noise > 0){
+		// Something here needed? No?
+	}
+
+
 };
 shutup.Actor.prototype.draw = function(){
 	if(this.g.i){
 		shutup.ctx.drawImage(this.g.i, this.g.x, this.g.y, this.g.w, this.g.h);
+		
+		// Do some size magic, depending on how much noise is made
+		if(this.noise > 0){
+			var size = this.noise*3;
+
+
+			var ratio = 57/47; // Taken from note image dimensions (w/h)
+			shutup.ctx.drawImage(shutup.assets.sprites.misc.note, this.g.x, this.g.y-size, size*ratio, size);
+		}
 	}else{
 		shutup.ctx.fillStyle = "purple";
 		shutup.ctx.fillRect(this.g.x, this.g.y, this.g.w, this.g.h);
@@ -285,8 +312,10 @@ shutup.Actor.prototype.updatePosition = function(row, col, drawX, drawY){
 	this.g.y = drawY - (this.g.h*9/10);
 	return true;
 };
+
 shutup.Actor.prototype.onClick = function(which){
 	console.log(this);
+	this.noise = Math.max(this.noise - 3, 0); // Decrease noise of the actor
 };
 
 

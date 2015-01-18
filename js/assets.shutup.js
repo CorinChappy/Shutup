@@ -9,6 +9,9 @@
 				green : "sprites/bg/green.png",
 				bench : "sprites/bg/bench.png"
 			},
+			misc : {
+				note : "sprites/misc/note.png"
+			},
 			actors : {
 				robin : [
 					"sprites/actors/robin/1.png",
