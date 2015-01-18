@@ -55,11 +55,8 @@ shutup.Room.prototype.update = function(dt){
 };
 shutup.Room.prototype.draw = function(){
 	shutup.h.defaultCan();
-	shutup.ctx.fillStyle = "green";
+	
 	shutup.ctx.drawImage(this.g.i.bg, this.g.x, this.g.y, this.g.w, this.g.h);
-	//shutup.ctx.fillRect(this.g.x, this.g.y, this.g.w, this.g.h);
-	shutup.h.defaultCan(24);
-	shutup.ctx.fillText("Green room", 30, 30);
 
 	// Draw each actor from top to bottom
 	this.actors.forEach(function(arr, row){
@@ -84,8 +81,6 @@ shutup.Room.prototype.draw = function(){
 			w = this.g.w,
 			h = size;//2;
 			shutup.ctx.drawImage(this.g.i.bench, x, y, w, h);
-			shutup.ctx.fillStyle = "blue";
-			//shutup.ctx.fillRect(x, y, w, h);
 	}, this);
 
 };
