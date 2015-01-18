@@ -32,9 +32,9 @@
      showgrid="false"
      inkscape:window-width="1366"
      inkscape:window-height="706"
-     inkscape:window-x="-8"
-     inkscape:window-y="-8"
-     inkscape:window-maximized="1"
+     inkscape:window-x="-32000"
+     inkscape:window-y="-32000"
+     inkscape:window-maximized="0"
      fit-margin-top="0"
      fit-margin-left="0"
      fit-margin-right="0"
@@ -47,7 +47,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -58,7 +58,10 @@
      transform="translate(-79.157659,-689.64375)">
     <g
        id="g2985"
-       transform="matrix(5,0,0,5,-875.12058,-3216.7625)">
+       transform="matrix(5,0,0,5,-875.12058,-3216.7625)"
+       inkscape:export-filename="C:\Users\Corin\CodeBase\Projects\Current\StageSoc-games\shutup\repo\assets\sprites\misc\note.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
       <path
          d="m 387.96869,40.317371 c 0,6.759927 -5.31394,12.239931 -11.86902,12.239931 -6.55508,0 -11.86902,-5.480004 -11.86902,-12.239931 0,-6.759926 5.31394,-12.23993 11.86902,-12.23993 6.55508,0 11.86902,5.480004 11.86902,12.23993 z"
          sodipodi:ry="12.23993"
