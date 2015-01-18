@@ -20,6 +20,9 @@ shutup.Room = function(rows, cols){
 
 	// 2D Array of actors moving on and off stage. First array represents the row they are on
 	this.moving = (function(b){var a = []; while(a.length < b){a.push([]);} return a;})(this.size.rows);
+	this.moveable = 0; // Can an actor move?
+	this.newActor = 0; // Should a new actor come on stage?
+	this.newActorThreashold = 5;
 
 	this.noiseLevel = 0;
 
@@ -37,14 +40,48 @@ shutup.Room = function(rows, cols){
 };
 shutup.Room.prototype.update = function(dt){
 	this.noiseLevel = 0; // Reset noise variable
+	this.moveable += dt;
+	this.newActor += dt;
+
 
 	// See if any of the actors need updating
 	this.forEachActor(function(act, row, col){
+		// See if this actor needs move
+		if(this.moveable > 5 && Math.random() < 0.1){
+			if(Math.random() < 0.4){
+				// Move off stage
+				this.moveActor(act, row, -1);
+			}else{
+				// Attempt to push into the room until the game allows
+				var a = false;
+				while(!a){
+					a = this.moveActor(act, row, Math.floor(Math.random() * (this.size.cols - 0)) + 0);
+				}
+			}
+			this.moveable = 0;
+		}
+
+
 		act.update(dt);
 
 		// Update the noise values regardless
 		this.noiseLevel += act.noise;
 	});
+	// See if an actor needs to get into the room
+	if(this.newActor > this.newActorThreashold){
+		var os = shutup.game.onStage;
+		if(os.length && Math.random() < 0.8){
+			var act = os.splice((Math.floor(Math.random() * (os.length - 0)) + 0), (Math.random() < 0.5)?1:this.size.cols)[0],
+			// Attempt to push into the room until the game allows
+				b = false;
+			while(!b){
+				b = shutup.game.room.moveActor(act, Math.floor(Math.random()*this.size.rows), Math.floor(Math.random()*this.size.cols));
+			}
+		}
+		this.newActor = 0;
+		this.newActorThreashold = (Math.floor(Math.random() * (10 - 5)) + 5);
+	}
+
 	// Update the moving actors, move from the larray if they have finished moving etc.
 	this.moving.forEach(function(arr, row){
 		if(arr.length > 0){
