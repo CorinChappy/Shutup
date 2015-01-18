@@ -21,6 +21,8 @@ shutup.Room = function(rows, cols){
 	// 2D Array of actors moving on and off stage. First array represents the row they are on
 	this.moving = (function(b){var a = []; while(a.length < b){a.push([]);} return a;})(this.size.rows);
 
+	this.noiseLevel = 0;
+
 	this.g = {
 		x : 0,
 		y : 0,
@@ -34,11 +36,15 @@ shutup.Room = function(rows, cols){
 	};
 };
 shutup.Room.prototype.update = function(dt){
+	this.noiseLevel = 0; // Reset noise variable
+
 	// See if any of the actors need updating
 	this.forEachActor(function(act, row, col){
 		if(act.animating || act.moving || act.entering || act.exiting || act.noise > 0){
 			act.update(dt);
 		}
+		// Update the noise values regardless
+		this.noiseLevel += act.noise;
 	});
 	// Update the moving actors, move from the larray if they have finished moving etc.
 	this.moving.forEach(function(arr, row){
@@ -55,7 +61,7 @@ shutup.Room.prototype.update = function(dt){
 };
 shutup.Room.prototype.draw = function(){
 	shutup.h.defaultCan();
-	
+
 	shutup.ctx.drawImage(this.g.i.bg, this.g.x, this.g.y, this.g.w, this.g.h);
 
 	// Draw each actor from top to bottom

@@ -142,8 +142,6 @@ var shutup = {
 
 		instructions : true, // Whether to display the instructions
 
-		noiseLevel : 0, // Current noise level
-
 		noiseThreshold : 100, // Level at which the game is lost
 
 		room : null, // Object representing the current composition of the room
@@ -252,7 +250,7 @@ var shutup = {
 							shutup.emmitEvent("victory");
 						}
 						// Check for failure condition
-						if(shutup.game.noiseLevel >= shutup.game.noiseThreshold){
+						if(shutup.game.room.noiseLevel >= shutup.game.noiseThreshold){
 							shutup.state = 4;
 							shutup.emmitEvent("failure");
 						}
@@ -290,7 +288,23 @@ var shutup = {
 					// Display the time
 					shutup.h.defaultCan(20);
 					shutup.ctx.textAlign = "right";
-					shutup.ctx.fillText(""+shutup.h.timeConvert(shutup.game.time), shutup.width - 10, 10);
+					shutup.ctx.fillText(""+shutup.h.timeConvert(shutup.game.time), shutup.width - 30, 10);
+
+					shutup.ctx.lineWidth = 3;
+					shutup.ctx.fillStyle = "white";
+					shutup.ctx.fillRect(30, 30, 300, 30);
+					var nl = shutup.game.room.noiseLevel;
+					if(nl < 25){
+						shutup.ctx.fillStyle = "green";
+					}else{
+						if(nl < 75){
+							shutup.ctx.fillStyle = "orange";
+						}else{
+							shutup.ctx.fillStyle = "red";
+						}
+					}
+					shutup.ctx.fillRect(30, 30, shutup.game.room.noiseLevel*3, 30);
+					shutup.ctx.strokeRect(30, 30, 300, 30);
 
 					switch(shutup.game.menu){
 						case 0 : { // No overlay
@@ -399,7 +413,6 @@ var shutup = {
 		shutup.game.time = 0;
 		shutup.game.menu = 0;
 		shutup.game.instructions = true;
-		shutup.game.noiseLevel = 0;
 		shutup.game.noiseThreshold = 100;
 		shutup.game.onStage = [];
 
