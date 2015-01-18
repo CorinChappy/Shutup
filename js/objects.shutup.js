@@ -55,7 +55,7 @@ shutup.Room.prototype.update = function(dt){
 				// Attempt to push into the room until the game allows
 				var a = false;
 				while(!a){
-					a = this.moveActor(act, row, Math.floor(Math.random() * (this.size.cols - 0)) + 0);
+					a = this.moveActor(act, row, shutup.h.randomInt(0, this.size.cols));
 				}
 			}
 			this.moveable = 0;
@@ -75,11 +75,11 @@ shutup.Room.prototype.update = function(dt){
 			// Attempt to push into the room until the game allows
 				b = false;
 			while(!b){
-				b = shutup.game.room.moveActor(act, Math.floor(Math.random()*this.size.rows), Math.floor(Math.random()*this.size.cols));
+				b = shutup.game.room.moveActor(act, shutup.h.randomInt(0, this.size.rows), shutup.h.randomInt(0, this.size.cols));
 			}
 		}
 		this.newActor = 0;
-		this.newActorThreashold = (Math.floor(Math.random() * (10 - 5)) + 5);
+		this.newActorThreashold = shutup.h.randomInt(5, 10);
 	}
 
 	// Update the moving actors, move from the larray if they have finished moving etc.

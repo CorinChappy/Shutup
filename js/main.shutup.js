@@ -180,12 +180,16 @@ var shutup = {
 					// Attempt to push into the room until the game allows
 					var b = false;
 					while(!b){
-						b = shutup.game.room.moveActor(act, Math.floor(Math.random()*roomSize.rows), Math.floor(Math.random()*roomSize.cols));
+						b = shutup.game.room.moveActor(act, shutup.h.randomInt(0, roomSize.rows), shutup.h.randomInt(0, roomSize.cols));
 					}
 				}
 				doneActors.push(def);
 				num--;
 			}
+		},
+
+		randomInt : function(min, max){
+  			return Math.floor(Math.random() * (max - min)) + min;
 		},
 
 		timeConvert : function(t, p){ // Takes the time (ms) and converts it into a time of day (p represents need for second presistion)
