@@ -31,16 +31,14 @@ shutup.Room = function(rows, cols){
 				bg : shutup.assets.sprites.bg.green,
 				bench : shutup.assets.sprites.bg.bench
 			}
-	}
+	};
 };
 shutup.Room.prototype.update = function(dt){
 	// See if any of the actors need updating
-	this.actors.forEach(function(arr, row){
-		arr.forEach(function(act, col){
-			if(act && (act.animating || act.moving || act.entering || act.exiting || act.noise > 0)){
-				act.update(dt);
-			}
-		});
+	this.forEachActor(function(act, row, col){
+		if(act.animating || act.moving || act.entering || act.exiting || act.noise > 0){
+			act.update(dt);
+		}
 	});
 	// Update the moving actors, move from the larray if they have finished moving etc.
 	this.moving.forEach(function(arr, row){
@@ -156,6 +154,17 @@ shutup.Room.prototype.removeActor = function(actor, row){ // Remove the actor fr
 	return (i > -1) && !!(a.splice(i, 1));
 };
 
+// Util functions
+/* Applies given function to each actor, this is thisArg or the room */
+shutup.Room.prototype.forEachActor = function(fun, thisArg){
+	this.actors.forEach(function(arr, row){
+		arr.forEach(function(act, col){
+			if(act){
+				fun.call(thisArg || this, act, row, col);
+			}
+		}, this);
+	}, this);
+};
 
 
 // A person that is in the room
