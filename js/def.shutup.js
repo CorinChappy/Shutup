@@ -10,62 +10,62 @@ shutup.def = {
 		{
 			name : "Robing Johnson 1",
 			get imgs() { return shutup.assets.sprites.actors.robin[0]; },
-			w : 100,
-			h : 123
+			h : 100,
+			w : 76
 		},
 		{
 			name : "Robing Johnson 2",
 			get imgs() { return shutup.assets.sprites.actors.robin[1]; },
-			w : 100,
-			h : 136
+			h : 100,
+			w : 68
 		},
 		{
 			name : "Robing Johnson 3",
 			get imgs() { return shutup.assets.sprites.actors.robin[2]; },
-			w : 100,
-			h : 152
+			h : 100,
+			w : 70
 		},
 		{
 			name : "Robing Johnson 4",
 			get imgs() { return shutup.assets.sprites.actors.robin[3]; },
-			w : 100,
-			h : 117
+			h : 100,
+			w : 84
 		},
 		{
 			name : "Robing Johnson 5",
 			get imgs() { return shutup.assets.sprites.actors.robin[4]; },
-			w : 100,
-			h : 122
+			h : 100,
+			w : 75
 		},
 		{
 			name : "Robing Johnson 6",
 			get imgs() { return shutup.assets.sprites.actors.robin[5]; },
-			w : 100,
-			h : 134
+			h : 100,
+			w : 74
 		},
 		{
 			name : "Robing Johnson 7",
 			get imgs() { return shutup.assets.sprites.actors.robin[6]; },
-			w : 100,
-			h : 120
+			h : 100,
+			w : 74
 		},
 		{
 			name : "Robing Johnson 8",
 			get imgs() { return shutup.assets.sprites.actors.robin[7]; },
-			w : 100,
-			h : 113
+			h : 100,
+			w : 77
 		},
 		{
 			name : "Robing Johnson 9",
 			get imgs() { return shutup.assets.sprites.actors.robin[8]; },
-			w : 100,
-			h : 145
+			h : 100,
+			w : 73
 		},
 		{
 			name : "Robing Johnson 10",
 			get imgs() { return shutup.assets.sprites.actors.robin[9]; },
-			w : 100,
-			h : 132
+			h : 100,
+			w : 80
 		}
 	]
 
