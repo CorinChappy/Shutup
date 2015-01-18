@@ -76,52 +76,52 @@ shutup.def = {
 			{
 				get imgs() { return shutup.assets.sprites.actors.andy[0]; },
 				h : 100,
-				w : 76
+				w : 63
 			},
 			{
 				get imgs() { return shutup.assets.sprites.actors.andy[1]; },
 				h : 100,
-				w : 68
+				w : 74
 			},
 			{
 				get imgs() { return shutup.assets.sprites.actors.andy[2]; },
 				h : 100,
-				w : 70
+				w : 80
 			},
 			{
 				get imgs() { return shutup.assets.sprites.actors.andy[3]; },
 				h : 100,
-				w : 84
+				w : 79
 			},
 			{
 				get imgs() { return shutup.assets.sprites.actors.andy[4]; },
 				h : 100,
-				w : 75
+				w : 89
 			},
 			{
 				get imgs() { return shutup.assets.sprites.actors.andy[5]; },
 				h : 100,
-				w : 74
+				w : 71
 			},
 			{
 				get imgs() { return shutup.assets.sprites.actors.andy[6]; },
 				h : 100,
-				w : 74
+				w : 68
 			},
 			{
 				get imgs() { return shutup.assets.sprites.actors.andy[7]; },
 				h : 100,
-				w : 77
+				w : 72
 			},
 			{
 				get imgs() { return shutup.assets.sprites.actors.andy[8]; },
 				h : 100,
-				w : 73
+				w : 65
 			},
 			{
 				get imgs() { return shutup.assets.sprites.actors.andy[9]; },
 				h : 100,
-				w : 80
+				w : 68
 			}
 		],
 
@@ -137,22 +137,22 @@ shutup.def = {
 			{
 				get imgs() { return shutup.assets.sprites.actors.tj[0]; },
 				h : 100,
-				w : 76
+				w : 90
 			},
 			{
 				get imgs() { return shutup.assets.sprites.actors.tj[1]; },
 				h : 100,
-				w : 68
+				w : 76
 			},
 			{
 				get imgs() { return shutup.assets.sprites.actors.tj[2]; },
 				h : 100,
-				w : 70
+				w : 82
 			},
 			{
 				get imgs() { return shutup.assets.sprites.actors.tj[3]; },
 				h : 100,
-				w : 84
+				w : 79
 			},
 			{
 				get imgs() { return shutup.assets.sprites.actors.tj[4]; },
@@ -162,27 +162,27 @@ shutup.def = {
 			{
 				get imgs() { return shutup.assets.sprites.actors.tj[5]; },
 				h : 100,
-				w : 74
+				w : 73
 			},
 			{
 				get imgs() { return shutup.assets.sprites.actors.tj[6]; },
 				h : 100,
-				w : 74
+				w : 69
 			},
 			{
 				get imgs() { return shutup.assets.sprites.actors.tj[7]; },
 				h : 100,
-				w : 77
+				w : 72
 			},
 			{
 				get imgs() { return shutup.assets.sprites.actors.tj[8]; },
 				h : 100,
-				w : 73
+				w : 77
 			},
 			{
 				get imgs() { return shutup.assets.sprites.actors.tj[9]; },
 				h : 100,
-				w : 80
+				w : 70
 			}
 		]
 	}
