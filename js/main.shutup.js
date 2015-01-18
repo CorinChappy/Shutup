@@ -289,7 +289,7 @@ var shutup = {
 				case 2 : { // IN GAME
 					shutup.d.room();
 
-					shutup.d.hud();
+					shutup.d.hud(shutup.game.room.noiseLevel);
 
 					switch(shutup.game.menu){
 						case 0 : { // No overlay
@@ -322,27 +322,30 @@ var shutup = {
 
 	// Misc drawing functions
 	d : {
-		hud : function(){
+		hud : function(nl){
 			// Display the time
 			shutup.h.defaultCan(20);
 			shutup.ctx.textAlign = "right";
 			shutup.ctx.fillText(""+shutup.h.timeConvert(shutup.game.time), shutup.width - 30, 10);
 
-			shutup.ctx.lineWidth = 3;
-			shutup.ctx.fillStyle = "white";
-			shutup.ctx.fillRect(30, 30, 300, 30);
-			var nl = Math.clamp(shutup.game.room.noiseLevel, 0, 100);
-			if(nl < 25){
-				shutup.ctx.fillStyle = "green";
-			}else{
-				if(nl < 75){
-					shutup.ctx.fillStyle = "orange";
+			if(nl || nl === 0){
+				Math.clamp(nl, 0, 100);
+				shutup.ctx.lineWidth = 3;
+				shutup.ctx.fillStyle = "white";
+				shutup.ctx.fillRect(30, 30, 300, 30);
+				
+				if(nl < 25){
+					shutup.ctx.fillStyle = "green";
 				}else{
-					shutup.ctx.fillStyle = "red";
+					if(nl < 75){
+						shutup.ctx.fillStyle = "orange";
+					}else{
+						shutup.ctx.fillStyle = "red";
+					}
 				}
+				shutup.ctx.fillRect(30, 30, nl*3, 30);
+				shutup.ctx.strokeRect(30, 30, 300, 30);
 			}
-			shutup.ctx.fillRect(30, 30, shutup.game.room.noiseLevel*3, 30);
-			shutup.ctx.strokeRect(30, 30, 300, 30);
 		},
 		room : function(){
 			shutup.game.room.draw();
@@ -363,7 +366,7 @@ var shutup = {
 			victory : function(){
 				if(shutup.game.room){
 					shutup.game.room.draw();
-					shutup.d.hud();
+					shutup.d.hud(shutup.game.room.noiseLevel, 0, 100);
 
 					shutup.ctx.globalAlpha = 0.7;
 					shutup.ctx.fillStyle = "white";
@@ -375,7 +378,7 @@ var shutup = {
 
 				shutup.h.defaultCan(24);
 				shutup.ctx.fillText("You kept them all quiet", 30, 130);
-				shutup.ctx.fillText("and he show was a success!", 30, 180);
+				shutup.ctx.fillText("and the show was a success!", 30, 180);
 
 				shutup.ctx.fillStyle = "white";
 				shutup.ctx.fillRect(shutup.width/2 - 150, shutup.height/2 - 29, 300, 57);
@@ -387,7 +390,7 @@ var shutup = {
 			failure : function(){
 				if(shutup.game.room){
 					shutup.game.room.draw();
-					shutup.d.hud();
+					shutup.d.hud(100);
 
 					shutup.ctx.globalAlpha = 0.7;
 					shutup.ctx.fillStyle = "white";
@@ -398,7 +401,7 @@ var shutup = {
 				}
 
 				shutup.h.defaultCan(24);
-				shutup.ctx.fillText("The cast were too loud", 30, 130);
+				shutup.ctx.fillText("The cast were too loud...", 30, 130);
 				shutup.ctx.fillText("The show is ruined!", 30, 180);
 
 				shutup.ctx.fillStyle = "white";
