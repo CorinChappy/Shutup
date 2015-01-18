@@ -71,7 +71,7 @@ shutup.Room.prototype.update = function(dt){
 	if(this.newActor > this.newActorThreashold){
 		var os = shutup.game.onStage;
 		if(os.length && Math.random() < 0.8){
-			var act = os.splice((Math.floor(Math.random() * (os.length - 0)) + 0), (Math.random() < 0.5)?1:this.size.cols)[0],
+			var act = os.splice(shutup.h.randomInt(0, os.length), 1)[0],
 			// Attempt to push into the room until the game allows
 				b = false;
 			while(!b){
