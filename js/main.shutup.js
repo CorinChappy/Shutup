@@ -158,10 +158,15 @@ var shutup = {
 
 	// Helper functions
 	h : {
-		generateCast : function(num){ // Generates a number of cast memebers 
+		generateCast : function(num, character){ // Generates a number of cast memebers 
 			num = num || 10;
+			character = character || "robin";
+
+			if(!shutup.def.actors[character]){
+				return false;
+			}
 			// Get array of the actor definitions
-			var actors = shuffle(shutup.def.actors.slice(0)),
+			var actors = shuffle(shutup.def.actors[character].slice(1)),
 				doneActors = [],
 				offStage = 0.5, // Chance of an actor being in the game
 				roomSize = shutup.game.room.size;
@@ -186,6 +191,8 @@ var shutup = {
 				doneActors.push(def);
 				num--;
 			}
+
+			return true;
 		},
 
 		randomInt : function(min, max){
@@ -455,7 +462,7 @@ var shutup = {
 
 
 
-	newGame : function(rows, cols){
+	newGame : function(rows, cols, character){
 		shutup.game.room = new shutup.Room(rows, cols); // Generate new playing room!
 
 		// Reset everything
@@ -465,7 +472,10 @@ var shutup = {
 		shutup.game.noiseThreshold = 100;
 		shutup.game.onStage = [];
 
-		shutup.h.generateCast(10); // Create a new cast
+		if(!shutup.h.generateCast(10, character)){ // Create a new cast
+			shutup.state = -1;
+			throw new Error("No character given");
+		}
 
 		shutup.locked = false; // Unlock
 

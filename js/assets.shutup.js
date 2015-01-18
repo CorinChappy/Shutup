@@ -26,6 +26,30 @@
 					"sprites/actors/robin/8.png",
 					"sprites/actors/robin/9.png",
 					"sprites/actors/robin/10.png"
+				],
+				andy : [
+					"sprites/actors/andy/1.png",
+					"sprites/actors/andy/2.png",
+					"sprites/actors/andy/3.png",
+					"sprites/actors/andy/4.png",
+					"sprites/actors/andy/5.png",
+					"sprites/actors/andy/6.png",
+					"sprites/actors/andy/7.png",
+					"sprites/actors/andy/8.png",
+					"sprites/actors/andy/9.png",
+					"sprites/actors/andy/10.png"
+				],
+				tj : [
+					"sprites/actors/tj/1.png",
+					"sprites/actors/tj/2.png",
+					"sprites/actors/tj/3.png",
+					"sprites/actors/tj/4.png",
+					"sprites/actors/tj/5.png",
+					"sprites/actors/tj/6.png",
+					"sprites/actors/tj/7.png",
+					"sprites/actors/tj/8.png",
+					"sprites/actors/tj/9.png",
+					"sprites/actors/tj/10.png"
 				]
 			}
 		},

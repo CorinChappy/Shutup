@@ -4,70 +4,188 @@
 
 
 shutup.def = {
-	actors : [
-		/*{w : 50, h : 50},
-		{w : 100, h : 100},*/
-		{
-			name : "Robing Johnson 1",
-			get imgs() { return shutup.assets.sprites.actors.robin[0]; },
-			h : 100,
-			w : 76
-		},
-		{
-			name : "Robing Johnson 2",
-			get imgs() { return shutup.assets.sprites.actors.robin[1]; },
-			h : 100,
-			w : 68
-		},
-		{
-			name : "Robing Johnson 3",
-			get imgs() { return shutup.assets.sprites.actors.robin[2]; },
-			h : 100,
-			w : 70
-		},
-		{
-			name : "Robing Johnson 4",
-			get imgs() { return shutup.assets.sprites.actors.robin[3]; },
-			h : 100,
-			w : 84
-		},
-		{
-			name : "Robing Johnson 5",
-			get imgs() { return shutup.assets.sprites.actors.robin[4]; },
-			h : 100,
-			w : 75
-		},
-		{
-			name : "Robing Johnson 6",
-			get imgs() { return shutup.assets.sprites.actors.robin[5]; },
-			h : 100,
-			w : 74
-		},
-		{
-			name : "Robing Johnson 7",
-			get imgs() { return shutup.assets.sprites.actors.robin[6]; },
-			h : 100,
-			w : 74
-		},
-		{
-			name : "Robing Johnson 8",
-			get imgs() { return shutup.assets.sprites.actors.robin[7]; },
-			h : 100,
-			w : 77
-		},
-		{
-			name : "Robing Johnson 9",
-			get imgs() { return shutup.assets.sprites.actors.robin[8]; },
-			h : 100,
-			w : 73
-		},
-		{
-			name : "Robing Johnson 10",
-			get imgs() { return shutup.assets.sprites.actors.robin[9]; },
-			h : 100,
-			w : 80
-		}
-	]
+	actors : {
+		
+
+
+		robin : [
+			"Robin Johnson",
+			{
+				get imgs() { return shutup.assets.sprites.actors.robin[0]; },
+				h : 100,
+				w : 76
+			},
+			{
+				get imgs() { return shutup.assets.sprites.actors.robin[1]; },
+				h : 100,
+				w : 68
+			},
+			{
+				get imgs() { return shutup.assets.sprites.actors.robin[2]; },
+				h : 100,
+				w : 70
+			},
+			{
+				get imgs() { return shutup.assets.sprites.actors.robin[3]; },
+				h : 100,
+				w : 84
+			},
+			{
+				get imgs() { return shutup.assets.sprites.actors.robin[4]; },
+				h : 100,
+				w : 75
+			},
+			{
+				get imgs() { return shutup.assets.sprites.actors.robin[5]; },
+				h : 100,
+				w : 74
+			},
+			{
+				get imgs() { return shutup.assets.sprites.actors.robin[6]; },
+				h : 100,
+				w : 74
+			},
+			{
+				get imgs() { return shutup.assets.sprites.actors.robin[7]; },
+				h : 100,
+				w : 77
+			},
+			{
+				get imgs() { return shutup.assets.sprites.actors.robin[8]; },
+				h : 100,
+				w : 73
+			},
+			{
+				get imgs() { return shutup.assets.sprites.actors.robin[9]; },
+				h : 100,
+				w : 80
+			}
+		],
+
+
+
+
+
+
+
+
+
+
+		andy : [
+			"Andy Sugden",
+			{
+				get imgs() { return shutup.assets.sprites.actors.andy[0]; },
+				h : 100,
+				w : 76
+			},
+			{
+				get imgs() { return shutup.assets.sprites.actors.andy[1]; },
+				h : 100,
+				w : 68
+			},
+			{
+				get imgs() { return shutup.assets.sprites.actors.andy[2]; },
+				h : 100,
+				w : 70
+			},
+			{
+				get imgs() { return shutup.assets.sprites.actors.andy[3]; },
+				h : 100,
+				w : 84
+			},
+			{
+				get imgs() { return shutup.assets.sprites.actors.andy[4]; },
+				h : 100,
+				w : 75
+			},
+			{
+				get imgs() { return shutup.assets.sprites.actors.andy[5]; },
+				h : 100,
+				w : 74
+			},
+			{
+				get imgs() { return shutup.assets.sprites.actors.andy[6]; },
+				h : 100,
+				w : 74
+			},
+			{
+				get imgs() { return shutup.assets.sprites.actors.andy[7]; },
+				h : 100,
+				w : 77
+			},
+			{
+				get imgs() { return shutup.assets.sprites.actors.andy[8]; },
+				h : 100,
+				w : 73
+			},
+			{
+				get imgs() { return shutup.assets.sprites.actors.andy[9]; },
+				h : 100,
+				w : 80
+			}
+		],
+
+
+
+
+
+
+
+
+		tj : [
+			"Thomas Joy",
+			{
+				get imgs() { return shutup.assets.sprites.actors.tj[0]; },
+				h : 100,
+				w : 76
+			},
+			{
+				get imgs() { return shutup.assets.sprites.actors.tj[1]; },
+				h : 100,
+				w : 68
+			},
+			{
+				get imgs() { return shutup.assets.sprites.actors.tj[2]; },
+				h : 100,
+				w : 70
+			},
+			{
+				get imgs() { return shutup.assets.sprites.actors.tj[3]; },
+				h : 100,
+				w : 84
+			},
+			{
+				get imgs() { return shutup.assets.sprites.actors.tj[4]; },
+				h : 100,
+				w : 75
+			},
+			{
+				get imgs() { return shutup.assets.sprites.actors.tj[5]; },
+				h : 100,
+				w : 74
+			},
+			{
+				get imgs() { return shutup.assets.sprites.actors.tj[6]; },
+				h : 100,
+				w : 74
+			},
+			{
+				get imgs() { return shutup.assets.sprites.actors.tj[7]; },
+				h : 100,
+				w : 77
+			},
+			{
+				get imgs() { return shutup.assets.sprites.actors.tj[8]; },
+				h : 100,
+				w : 73
+			},
+			{
+				get imgs() { return shutup.assets.sprites.actors.tj[9]; },
+				h : 100,
+				w : 80
+			}
+		]
+	}
 
 
 };
