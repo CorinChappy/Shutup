@@ -47,6 +47,10 @@
         left: 20px;
         width: 150px;
     }
+    canvas:-webkit-full-screen { 
+        height: 100%;
+        /*margin: auto;*/
+    }
     @media screen and (max-width: 975px){
         /* Make the title and notice static here, so they don't overlap the game */
         #title{
@@ -66,6 +70,7 @@
 <div id="notice">
     <p>Please note this is a development version of the game. <a href="https://github.com/CorinChappy/Shutup">GitHub</a>.</p>
     <p>Find the official release on the <a href="http://stagesoc.org.uk/games/shutup/">StageSoc website</a>.</p>
+    <p><a href="javascript:toggleFullScreen(shutup.canvas)">Fullscreen</a></p>
 </div>
 
 <!-- Load JS here for the common good -->
@@ -83,6 +88,34 @@
 window.addEventListener("load",function(){
     shutup.init(document.getElementById("game"));
 });
+
+
+// Fullscreen toggle code from Mozilla (https://developer.mozilla.org/en-US/docs/Web/Guide/API/DOM/Using_full_screen_mode)
+function toggleFullScreen(element) {
+  if (!document.fullscreenElement &&    // alternative standard method
+      !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement ) {  // current working methods
+    if (element.requestFullscreen) {
+      element.requestFullscreen();
+    } else if (element.msRequestFullscreen) {
+      element.msRequestFullscreen();
+    } else if (element.mozRequestFullScreen) {
+      element.mozRequestFullScreen();
+    } else if (element.webkitRequestFullscreen) {
+      element.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+    }
+  } else {
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    } else if (document.msExitFullscreen) {
+      document.msExitFullscreen();
+    } else if (document.mozCancelFullScreen) {
+      document.mozCancelFullScreen();
+    } else if (document.webkitExitFullscreen) {
+      document.webkitExitFullscreen();
+    }
+  }
+}
+
 </script>
 </body>
 </html>

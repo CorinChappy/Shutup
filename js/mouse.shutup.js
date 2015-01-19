@@ -19,8 +19,8 @@
 		getCoords : function(e){ // Get the coords from a given mouse event
 			var rect = shutup.canvas.getBoundingClientRect();
 			return new shutup.mouse.Coords(
-				e.clientX - rect.left,
-				e.clientY - rect.top
+				(e.clientX-rect.left)/(rect.right-rect.left)*shutup.width,
+				(e.clientY-rect.top)/(rect.bottom-rect.top)*shutup.height
 			);
 		},
 
