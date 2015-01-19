@@ -229,7 +229,7 @@ shutup.Actor = function(def){
 	this.g = {
 		y : 0,
 		h : def.h || 50,
-		w : def.w || 50,
+		w : def.w || 50
 	//	i : this.imgs.front
 	};
 	if(def.imgs){

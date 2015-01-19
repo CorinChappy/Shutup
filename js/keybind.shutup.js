@@ -100,7 +100,7 @@
 					shutup.state = 1;
 				break; }
 			}
-		},
+		}
 
 	};
 	shutup.keyPressAction[13] = shutup.keyPressAction[32]; // Make ENTER an alias for SPACE

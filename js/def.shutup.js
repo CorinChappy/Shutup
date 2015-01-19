@@ -8,7 +8,7 @@ shutup.def = {
 		
 
 
-		robin : [
+		"robin" : [
 			"Robin Johnson",
 			{
 				get imgs() { return shutup.assets.sprites.actors.robin[0]; },
@@ -71,7 +71,7 @@ shutup.def = {
 
 
 
-		andy : [
+		"andy" : [
 			"Andy Sugden",
 			{
 				get imgs() { return shutup.assets.sprites.actors.andy[0]; },
@@ -132,7 +132,7 @@ shutup.def = {
 
 
 
-		tj : [
+		"tj" : [
 			"Thomas Joy",
 			{
 				get imgs() { return shutup.assets.sprites.actors.tj[0]; },

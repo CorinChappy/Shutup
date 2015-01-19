@@ -460,7 +460,7 @@ var shutup = {
 			shutup.ctx.fillText("Play", shutup.width/2, 100);
 
 			// Instructions
-			var d = shutup.def.actors.robin[3];
+			var d = shutup.def.actors["robin"][3];
 
 			shutup.ctx.textAlign = "left";
 			shutup.ctx.fillStyle = "black";

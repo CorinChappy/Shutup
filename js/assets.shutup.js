@@ -136,7 +136,7 @@
 					try{
 						xhr.send(); // Attempt to send, if running the game locally (file:///) audio will fail and an error will be thrown here
 					}catch(e){}
-				}
+				};
 
 				for(var m in obj.assets.audio){
 					if(obj.assets.audio.hasOwnProperty(m)){

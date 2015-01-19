@@ -33,7 +33,7 @@
     }
 
     #game{
-        margin: auto; width: 750px;
+        margin: auto; width: 1000px;
     }
 
     #title{
@@ -41,20 +41,10 @@
         top: 10px;
         left: 10px;
     }
-    #notice{
-        position: absolute;
-        bottom: 50px;
-        left: 20px;
-        width: 150px;
-    }
     @media screen and (max-width: 975px){
         /* Make the title and notice static here, so they don't overlap the game */
         #title{
             position: static;
-        }
-        #notice{
-            position: static;
-            width: inherit;
         }
     }
     </style>
@@ -63,22 +53,11 @@
 <h1 id="title">Shutup</h1>
 <div id="game"></div>
 
-<div id="notice">Please note this is a development version of the game. <a href="https://github.com/CorinChappy/Shutup">GitHub</a></div>
-
 <!-- Load JS here for the common good -->
-<script src="js/main.shutup.js"></script>
-<script src="js/audio.shutup.js"></script>
-<script src="js/assets.shutup.js"></script>
-<script src="js/objects.shutup.js"></script>
-<script src="js/keybind.shutup.js"></script>
-<script src="js/mouse.shutup.js"></script>
-<script src="js/def.shutup.js"></script>
-<script src="js/events.shutup.js"></script>
-
+<script src="js/shutup.js"></script>
 <script>
-// INIT on load, shutup.init takes the element that the canvas gets put into
 window.addEventListener("load",function(){
-    shutup.init(document.getElementById("game"));
+    shutup.init(document.getElementById("game")); // Call shutup.init and pass in the element for the game to be contained in
 });
 </script>
 </body>
