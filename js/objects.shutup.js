@@ -356,7 +356,6 @@ shutup.Actor.prototype.updatePosition = function(row, col, drawX, drawY){
 };
 
 shutup.Actor.prototype.onClick = function(which){
-	console.log(this);
 	this.noise = Math.max(this.noise - 3, 0); // Decrease noise of the actor
 };
 
