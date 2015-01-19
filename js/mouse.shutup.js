@@ -4,12 +4,24 @@
 
 	shutup.mouse = {
 
+		Coords : function(x, y){
+			this.x = x;
+			this.y = y;
+
+			this.within = function(t, b, l, r){
+				return this.x >= t && this.x <= b && this.y >= l && this.y <= r;
+			};
+			this.boxed = function(t, h, l, w){
+				return this.x >= t && this.x <= t + h && this.y >= l && this.y <= l + w;
+			};
+		},
+
 		getCoords : function(e){ // Get the coords from a given mouse event
 			var rect = shutup.canvas.getBoundingClientRect();
-			return {
-				x: e.clientX - rect.left,
-				y: e.clientY - rect.top
-			};
+			return new shutup.mouse.Coords(
+				e.clientX - rect.left,
+				e.clientY - rect.top
+			);
 		},
 
 		constant : {
@@ -25,8 +37,15 @@
 			function(coords, e){
 				switch(shutup.state){
 					case 1 : { // Main Menu
-						if(coords.x >= 325 && coords.x <= 425 && coords.y >= 90 && coords.y <= 130){
+						if(coords.within(325, 425, 90, 130)){
 							shutup.newGame();
+						}
+						if(coords.within(580, 650, 400, 500)){
+							if(shutup.menuClickSize > 0){
+								shutup.menuClickSize -= 3;
+							}else{
+								shutup.menuClickSize = 30;
+							}
 						}
 					break; }
 					case 2 : { // IN GAME
@@ -39,7 +58,7 @@
 
 					case 3 :   // Success
 					case 4 : { // Failure
-						if(coords.x >= 250 && coords.x <= 500 && coords.y >= 500 && coords.y <= 540){
+						if(coords.within(250, 500, 500, 540)){
 							shutup.state = 1;
 						}
 					break; }

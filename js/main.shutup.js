@@ -127,6 +127,7 @@ var shutup = {
 	state : 0,
 
 	menuOption : 0, // Currently selected menu option (top to bottom/left to right)
+	menuClickSize : 30,
 
 	locked : false, // If locked interaction is disabled
 
@@ -385,7 +386,7 @@ var shutup = {
 
 				shutup.h.defaultCan(24);
 				shutup.ctx.fillText("You kept them all quiet", 30, 130);
-				shutup.ctx.fillText("and the show was a success!", 30, 180);
+				shutup.ctx.fillText("thus the show was a success!", 30, 180);
 
 				shutup.ctx.fillStyle = "white";
 				shutup.ctx.fillRect(shutup.width/2 - 150, shutup.height/2 - 29, 300, 57);
@@ -455,7 +456,41 @@ var shutup = {
 			shutup.h.defaultCan(24);
 			shutup.ctx.fillText("Welcome to Shutup!", 30, 30);
 			shutup.ctx.textAlign = "center";
+			shutup.ctx.fillStyle = "yellow";
 			shutup.ctx.fillText("Play", shutup.width/2, 100);
+
+			// Instructions
+			var d = shutup.def.actors.robin[3];
+
+			shutup.ctx.textAlign = "left";
+			shutup.ctx.fillStyle = "black";
+			shutup.ctx.fillText("Instructions", 30, 200);
+			shutup.h.defaultCan(18);
+			shutup.ctx.fillText("Here is an important actor:", 30, 250);
+
+			shutup.ctx.drawImage(d.imgs, 530, 200, d.w, d.h);
+
+
+			shutup.ctx.fillText("Sometimes he makes noise...", 30, 350);
+
+			shutup.ctx.drawImage(d.imgs, 530, 300, d.w, d.h);
+			shutup.ctx.drawImage(shutup.assets.sprites.misc.note, 500, 280, 37, 30);
+
+
+			shutup.ctx.fillText("Click him to make him shut up!", 30, 450);
+
+			shutup.ctx.drawImage(d.imgs, 580, 400, d.w, d.h);
+			shutup.ctx.drawImage(shutup.assets.sprites.misc.note, 550, 390, (279/229) * shutup.menuClickSize, shutup.menuClickSize);
+
+
+			shutup.ctx.fillText("Don't let the bar reach full", 30, 530);
+			shutup.ctx.fillText("or the show will be ruined!", 30, 560);
+
+
+			shutup.ctx.lineWidth = 3;
+			shutup.ctx.fillStyle = "red";
+			shutup.ctx.fillRect(540, 550, 200, 30);
+			shutup.ctx.strokeRect(540, 550, 200, 30);
 		}
 
 	},
