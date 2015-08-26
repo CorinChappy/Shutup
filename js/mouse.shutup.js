@@ -76,12 +76,14 @@
 
 		init : function(){
 			shutup.canvas.addEventListener("click", function(e){
+				e.preventDefault(); // Prevent default to prevent highlighting of text white playing
+
 				var coords = shutup.mouse.getCoords(e),
 					w = e.which;
 				if(w === 0 || (w && w < 4 && w > 0)){
 					shutup.mouse.func[w](coords, e);
 				}
-			});
+			}, true);
 		}
 
 	};
