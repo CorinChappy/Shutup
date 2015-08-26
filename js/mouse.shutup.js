@@ -83,7 +83,10 @@
 				if(w === 0 || (w && w < 4 && w > 0)){
 					shutup.mouse.func[w](coords, e);
 				}
-			}, true);
+			});
+			shutup.canvas.addEventListener("mousedown", function(e){
+				e.preventDefault(); // Prevent default to prevent highlighting of text white playing
+			});
 		}
 
 	};
