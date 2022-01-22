@@ -2,7 +2,7 @@
 	Shutup is a game in a series of Stage Technician themed games (StageSoc Games), designed for use
 	on the University of Southampton Stage Technicians' Society's website (stagesoc.org.uk).
 
-	
+
 	Copyright (C) 2014  Corin Chaplin
 			All files contained herein have this notice unless otherwise stated
 			To view all collaborators on this project see the list
@@ -66,7 +66,7 @@ var pageHidden = (function(){
 		}
 		return null;
 	})();
-	
+
 	if (!prop){
 		return function(){return false;};
 	}
@@ -155,11 +155,11 @@ var shutup = {
 		volume : 1 // Volume for sound effects (0-1)
 
 	},
-	
+
 
 	// Helper functions
 	h : {
-		generateCast : function(num, character){ // Generates a number of cast memebers 
+		generateCast : function(num, character){ // Generates a number of cast memebers
 			num = num || 10;
 			character = character || "robin";
 
@@ -255,7 +255,7 @@ var shutup = {
 
 					if(shutup.game.menu !== 2){ // Do not update on pause/game menu
 						shutup.e.tick(dt); // Update the timer
-					
+
 						// Check for winning conditions
 						if(shutup.game.time > 180000){ // 210000ms = 210s = 3.5 minutes = 3.5 hours in gametime (IE winning is at 10:30pm)
 							shutup.state = 3;
@@ -341,7 +341,7 @@ var shutup = {
 				shutup.ctx.lineWidth = 3;
 				shutup.ctx.fillStyle = "white";
 				shutup.ctx.fillRect(30, 30, 300, 30);
-				
+
 				if(nl < 25){
 					shutup.ctx.fillStyle = "green";
 				}else{
@@ -559,7 +559,7 @@ shutup.init = function(div, assetDir){
 	shutup.mouse.init();
 
 	// Default fonts, etc for drawing
-	shutup.ctx.font = "12px 'Press Start 2P' Helvetica";
+	shutup.ctx.font = '12px "Press Start 2P", Helvetica';
 	shutup.ctx.textBaseline = "top";
 	shutup.ctx.save();
 
