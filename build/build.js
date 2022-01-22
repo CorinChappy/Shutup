@@ -22,7 +22,7 @@
 
 var fs = require("fs");
 var querystring = require('querystring');
-var http = require('http');
+var https = require('https');
 
 if(process.argv.indexOf("-h") >= 0 || process.argv.indexOf("--help") >= 0){
 	console.log("Build file for shutup");
@@ -127,6 +127,7 @@ var post_data = querystring.stringify({
 	//'compilation_level' : 'SIMPLE_OPTIMIZATIONS',
 	'output_format': 'json',
 	'output_info': ['compiled_code', 'errors'],
+	'language_out': 'ES5',
 	'language' : 'ECMASCRIPT5_STRICT',
 	'js_code' : full
 });
@@ -134,7 +135,7 @@ var post_data = querystring.stringify({
 // An object of options to indicate where to post to
 var post_options = {
 	host: 'closure-compiler.appspot.com',
-	port: '80',
+	port: '443',
 	path: '/compile',
 	method: 'POST',
 	headers: {
@@ -146,7 +147,7 @@ var post_options = {
 var chunkAcc = "";
 
 // Set up the request
-var post_req = http.request(post_options, function(res) {
+var post_req = https.request(post_options, function(res) {
 	res.setEncoding('utf8');
 	res.on("data", function(chunk){
 		chunkAcc += chunk;
@@ -199,7 +200,7 @@ function preCompress(shutupjs){
 		.file("example.html", fs.readFileSync("example.html"))
 		.file("CopyrightNotice", copyright)
 		.file("LICENSE", fs.readFileSync(rootDir + "LICENSE"))
-		.generate({type:"nodebuffer", compression: "DEFLATE"});
+		.generateNodeStream({type:"nodebuffer", compression: "DEFLATE"});
 	fs.writeFileSync(filename, blob);
 }
 
